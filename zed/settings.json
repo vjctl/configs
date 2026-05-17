@@ -1,0 +1,118 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "diff_view_style": "split",
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "format_on_save": "off",
+  "vim_mode": true,
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  "ui_font_weight": 550.0,
+  "agent_buffer_font_size": 20.0,
+  "ui_font_size": 21.0,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "VSCode Great Icons Theme",
+    "dark": "Material Icon Theme",
+  },
+  "cursor_shape": "bar",
+  "agent": {
+    "dock": "right",
+    "flexible": false,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4.1",
+      "enable_thinking": false,
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+    "enable_feedback": false,
+  },
+  "ui_font_family": "UbuntuMono Nerd Font",
+  "buffer_font_size": 21.0,
+  "agent_servers": {
+    "cursor": {
+      "default_config_options": {
+        "mode": "ask"
+      },
+      "favorite_config_option_values": {
+        "model": [
+          "gpt-5.3-codex[reasoning=medium,fast=false]",
+          "claude-opus-4-7[thinking=true,context=200k,effort=high]"
+        ],
+      },
+      "type": "registry",
+    },
+    "github-copilot-cli": {
+      "favorite_config_option_values": {
+        "allow_all": [
+          "off"
+        ],
+        "model": [
+          "gpt-5.3-codex",
+          "claude-opus-4.7"
+        ]
+      },
+      "type": "registry",
+    },
+  },
+  "auto_update": true,
+  "auto_install_extensions": {
+    "dockerfile": true,
+    "git-firefly": true,
+    "log": true,
+    "nix": true,
+    "terraform": true,
+    "vscode-great-icons": true,
+    "zedokai": true,
+    "material-icon-theme": true,
+    "powershell": true,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "terminal": {
+    "font_size": 21.0,
+    "font_family": "UbuntuMono Nerd Font",
+    "cursor_shape": "block",
+    "blinking": "on",
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000,
+    },
+  },
+  "buffer_font_family": "UbuntuMono Nerd Font",
+  "file_types": {
+    "terraform": ["*.hcl", "*.hcl"],
+  },
+  "base_keymap": "VSCode",
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Zedokai Darker (Filter Spectrum)",
+  },
+}

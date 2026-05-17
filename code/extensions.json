@@ -1,0 +1,31 @@
+{
+    "recommendations": [
+        // Theme and Icons
+        "inci-august.august-themes",
+        "pkief.material-icon-theme",
+        
+        // Python Development
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        
+        // Infrastructure and Cloud
+        "hashicorp.terraform",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml",
+        
+        // Git Integration
+        "eamodio.gitlens",
+        
+        // API Development
+        "humao.rest-client",
+        
+        // General Development
+        "visualstudioexptteam.vscodeintellicode",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        
+        // Docker
+        "ms-azuretools.vscode-docker",
+        "anysphere.remote-wsl"
+    ]
+}

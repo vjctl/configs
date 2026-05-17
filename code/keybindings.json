@@ -1,0 +1,27 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+      "key": "shift+alt+t",
+      "command": "workbench.action.tasks.runTask"
+  },
+  {
+      "key": "cmd+shift+t",
+      "command": "workbench.action.closePanel",
+      // "when": "terminalFocus"
+  },
+  {
+      "key": "cmd+shift+t",
+      "command": "workbench.action.toggleMaximizedPanel",
+      "when": "!terminalFocus"
+  },
+  {
+    "key": "cmd+j",
+    "command": "workbench.action.terminal.focus",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "cmd+k",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  }
+]

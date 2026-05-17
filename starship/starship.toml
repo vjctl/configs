@@ -1,0 +1,116 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 3600000
+
+# Timeout for starship to scan files (in milliseconds).
+scan_timeout = 500
+
+# Define the format/order of prompt elements
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$python\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$gcloud\
+$openstack\
+$azure\
+$crystal\
+$custom\
+$status\
+$os\
+$battery\
+$kubernetes\
+$env_var\
+$aws\
+$cmd_duration
+[╰─](white)$time$character\
+"""
+[character]
+success_symbol = '[ ❯](bold green)'
+error_symbol = '[ ❯](bold red)'
+
+[python]
+pyenv_version_name = true
+python_binary = "python"
+style = "bold green"
+
+# Show current directory
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold purple"
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+# Show time
+[time]
+disabled = false
+style = "white"
+format = "[$time]($style)"
+
+# Disable Terraform workspace and version display
+[terraform]
+disabled = true
+
+[kubernetes]
+disabled = false
+style = "bold blue"
+format = '[$symbol](bright-blue)[$context( \($namespace\))]($style) '
+
+[env_var.K8S]
+format = "[⚓k8s]($style) "
+style = "bold blue"
