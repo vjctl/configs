@@ -3,9 +3,9 @@
 ## Brewfile
 
 ```bash
-brew bundle          # install from Brewfile
+brew bundle               # install from Brewfile
 brew bundle --verbose
-brew bundle check    # verify all deps installed
+brew bundle check         # verify all deps installed
 brew bundle dump --force  # generate Brewfile from current installs
 brew bundle cleanup       # show what would be uninstalled
 brew bundle cleanup --force

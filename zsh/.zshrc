@@ -14,6 +14,7 @@ plugins=(git
         zsh-autosuggestions
         #zsh-autocomplete
         #fzf-zsh-plugin
+        pyautoenv
         )
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
@@ -68,3 +69,21 @@ _lc() {
     "$@" | lolcat
 }
 alias lc='_lc '
+
+# Herdr Config
+if [[ -n "$HERDR_TAB_ID" ]]; then
+  autoload -Uz add-zsh-hook
+
+  # Name the tab after the active program
+  _herdr_preexec() {
+    herdr tab rename "$HERDR_TAB_ID" "${${1%% *}:t}" >/dev/null 2>&1
+  }
+
+  # Revert back to shell name at the prompt
+  _herdr_precmd() {
+    herdr tab rename "$HERDR_TAB_ID" "${SHELL:t}" >/dev/null 2>&1
+  }
+
+  add-zsh-hook preexec _herdr_preexec
+  add-zsh-hook precmd _herdr_precmd
+fi
