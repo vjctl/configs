@@ -7,7 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "diff_view_style": "split",
+  "vim": {
+    "default_mode": "insert"
+  },
+  "diff_view_style": "unified",
   "cli_default_open_behavior": "new_window",
   "project_panel": {
     "dock": "left"
@@ -36,6 +39,7 @@
   },
   "cursor_shape": "bar",
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "flexible": false,
     "default_model": {
@@ -52,24 +56,24 @@
   "agent_servers": {
     "cursor": {
       "default_config_options": {
-        "mode": "ask"
+        "optimize_for": "cost"
       },
-      "favorite_config_option_values": {
-        "model": [
-          "gpt-5.3-codex[reasoning=medium,fast=false]",
-          "claude-opus-4-7[thinking=true,context=200k,effort=high]"
-        ],
-      },
-      "type": "registry",
+      "type": "registry"
+    },
+    "opencode": {
+      "type": "registry"
     },
     "github-copilot-cli": {
+      "default_config_options": {
+        "reasoning_effort": "medium",
+        "model": "auto"
+      },
       "favorite_config_option_values": {
         "allow_all": [
           "off"
         ],
         "model": [
-          "gpt-5.3-codex",
-          "claude-opus-4.7"
+          "auto"
         ]
       },
       "type": "registry",
@@ -95,6 +99,10 @@
     "metrics": false,
   },
   "terminal": {
+    "button": true,
+    "copy_on_select": true,
+    "shell": "system",
+    "show_count_badge": true,
     "font_size": 21.0,
     "font_family": "UbuntuMono Nerd Font",
     "cursor_shape": "block",
@@ -112,7 +120,7 @@
   "base_keymap": "VSCode",
   "theme": {
     "mode": "dark",
-    "light": "One Light",
+    "light": "Gruvbox Light",
     "dark": "Zedokai Darker (Filter Spectrum)",
   },
 }
