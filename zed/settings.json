@@ -7,6 +7,31 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "language_models": {
+    "openai_compatible": {
+      "custom": {
+        "api_url": "https://open-ai-compatible.com/api",
+        "available_models": [
+          {
+            "name": "gpt-4o",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "reasoning_effort": "medium",
+            "capabilities": {
+              "tools": true,
+              "images": true,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": true,
+              "chat_completions": true,
+              "interleaved_reasoning": false,
+              "max_tokens_parameter": false
+            }
+          }
+        ]
+      }
+    }
+  },
   "vim": {
     "default_mode": "insert"
   },
@@ -43,9 +68,10 @@
     "dock": "right",
     "flexible": false,
     "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4.1",
-      "enable_thinking": false,
+      "effort": "medium",
+      "provider": "Custom",
+      "model": "marvin-4o",
+      "enable_thinking": true,
     },
     "favorite_models": [],
     "model_parameters": [],
