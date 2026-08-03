@@ -17,15 +17,13 @@
             "max_tokens": 200000,
             "max_output_tokens": 32000,
             "max_completion_tokens": 200000,
-            "reasoning_effort": "medium",
             "capabilities": {
               "tools": true,
-              "images": true,
-              "parallel_tool_calls": true,
-              "prompt_cache_key": true,
+              "images": false,
+              "parallel_tool_calls": false,
+              "prompt_cache_key": false,
               "chat_completions": true,
-              "interleaved_reasoning": false,
-              "max_tokens_parameter": false
+              "interleaved_reasoning": false
             }
           }
         ]
@@ -68,10 +66,9 @@
     "dock": "right",
     "flexible": false,
     "default_model": {
-      "effort": "medium",
-      "provider": "Custom",
-      "model": "marvin-4o",
-      "enable_thinking": true,
+      "provider": "custom",
+      "model": "gpt-4o",
+      "enable_thinking": false,
     },
     "favorite_models": [],
     "model_parameters": [],
