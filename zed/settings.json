@@ -28,6 +28,10 @@
           }
         ]
       }
+    },
+    "bedrock": {
+      "authentication_method": "api_key",
+      "region": "eu-west-1"
     }
   },
   "vim": {
@@ -79,7 +83,7 @@
   "agent_servers": {
     "cursor": {
       "default_config_options": {
-        "optimize_for": "cost"
+        "optimize_for": "intelligence"
       },
       "type": "registry"
     },
@@ -88,7 +92,6 @@
     },
     "github-copilot-cli": {
       "default_config_options": {
-        "reasoning_effort": "medium",
         "model": "auto"
       },
       "favorite_config_option_values": {
