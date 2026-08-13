@@ -61,8 +61,8 @@
   "ui_font_size": 21.0,
   "icon_theme": {
     "mode": "dark",
-    "light": "VSCode Great Icons Theme",
-    "dark": "Material Icon Theme",
+    "light": "Material Icon Theme",
+    "dark": "Icons modern material (Dark)",
   },
   "cursor_shape": "bar",
   "agent": {
@@ -83,6 +83,8 @@
   "agent_servers": {
     "cursor": {
       "default_config_options": {
+        "model": "auto",
+        "mode": "ask",
         "optimize_for": "intelligence"
       },
       "type": "registry"
@@ -112,10 +114,9 @@
     "log": true,
     "nix": true,
     "terraform": true,
-    "vscode-great-icons": true,
+    "icons-modern-material": true,
     "zedokai": true,
     "material-icon-theme": true,
-    "powershell": true,
   },
   "session": {
     "trust_all_worktrees": true,
@@ -140,9 +141,6 @@
     },
   },
   "buffer_font_family": "UbuntuMono Nerd Font",
-  "file_types": {
-    "terraform": ["*.hcl", "*.hcl"],
-  },
   "base_keymap": "VSCode",
   "theme": {
     "mode": "dark",
