@@ -1,4 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
+export HOMEBREW_NO_ENV_HINTS=1
 export DISABLE_UNTRACKED_FILES_DIRTY="true"
 export TERRAGRUNT_TFPATH="terraform"
 export TERRAGRUNT_PROVIDER_CACHE=1

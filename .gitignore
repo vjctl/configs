@@ -45,3 +45,4 @@ pip-delete-this-directory.txt
 
 # Homebrew
 Brewfile.lock.json
+Brewfile
