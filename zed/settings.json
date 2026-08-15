@@ -60,12 +60,16 @@
   "agent_buffer_font_size": 20.0,
   "ui_font_size": 21.0,
   "icon_theme": {
-    "mode": "dark",
+    "mode": "system",
     "light": "Material Icon Theme",
     "dark": "Icons modern material (Dark)",
   },
   "cursor_shape": "bar",
   "agent": {
+    "sandbox_permissions": {
+      "allow_unsandboxed": true
+    },
+    "thinking_display": "always_expanded",
     "sidebar_side": "right",
     "dock": "right",
     "flexible": false,
@@ -87,6 +91,9 @@
         "mode": "ask",
         "optimize_for": "intelligence"
       },
+      "type": "registry"
+    },
+    "goose": {
       "type": "registry"
     },
     "opencode": {
@@ -143,8 +150,8 @@
   "buffer_font_family": "UbuntuMono Nerd Font",
   "base_keymap": "VSCode",
   "theme": {
-    "mode": "dark",
-    "light": "Gruvbox Light",
+    "mode": "system",
+    "light": "One Light",
     "dark": "Zedokai Darker (Filter Spectrum)",
   },
 }
