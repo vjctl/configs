@@ -12,3 +12,16 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [http]
 	sslCAInfo = /etc/ssl/certs/ca-certificates.crt
+	sslBackend = openssl
+[core]
+	hooksPath = ~/.config/git/hooks
+	excludesfile = ~/.config/git/ignore
+[fetch]
+	prune = true
+[credential]
+	gitHubAccountFiltering = false
+
+[includeIf "gitdir:~/devel/learn/"]
+	path = ~/.config/git/config-ctl
+[includeIf "hasconfig:remote.*.url:https://github.com/vjctl/**"]
+	path = ~/.config/git/config-ctl
