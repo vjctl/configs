@@ -17,9 +17,9 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$nix_shell\
 $docker_context\
 $python\
-$package\
 $c\
 $cmake\
 $cobol\
@@ -65,10 +65,6 @@ $buf\
 $conda\
 $meson\
 $spack\
-$memory_usage\
-$gcloud\
-$openstack\
-$azure\
 $crystal\
 $custom\
 $status\
@@ -76,24 +72,59 @@ $os\
 $battery\
 $kubernetes\
 $env_var\
-$aws\
 $cmd_duration
 [╰─](white)$time$character\
 """
+
+right_format = """
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$memory_usage\
+"""
+
 [character]
-success_symbol = '[ ❯](bold green)'
-error_symbol = '[ ❯](bold red)'
+success_symbol = '[ ❯](green)'
+error_symbol = '[ ❯](red)'
+
+[git_branch]
+symbol = ""
+style = "purple"
+format = 'on [$symbol $branch ]($style)'
+
+[git_status]
+format = '([\[$ahead_behind$all_status\]]($style) )'
+stashed = "[${count}*](green)"
+modified = "[${count}+](yellow)"
+deleted =  "[${count}-](cyan)"
+conflicted =  "[${count}~](red)"
+ahead = "${count}↑"
+behind = "${count}↓"
+untracked = "[${count}?](blue)"
+staged = "[${count}+](green)"
+
+[git_state]
+style =	"bold red"
+format = "[$state( $progress_current/$progress_total) ]($style)"
+rebase = "rebase"
+merge = "merge"
+revert = "revert"
+cherry_pick = "cherry"
+bisect = "bisect"
+am = "am"
+am_or_rebase = "am/rebase"
 
 [python]
-pyenv_version_name = true
+pyenv_version_name = false
 python_binary = "python"
-style = "bold green"
+style = "green"
 
 # Show current directory
 [directory]
+style = "#93e545"
 truncation_length = 3
 truncate_to_repo = true
-style = "bold purple"
 format = "[$path]($style)[$read_only]($read_only_style) "
 
 # Show time
@@ -108,9 +139,20 @@ disabled = true
 
 [kubernetes]
 disabled = false
-style = "bold blue"
-format = '[$symbol](bright-blue)[$context( \($namespace\))]($style) '
+style = "#0b60ff"
+symbol = "☸️ "
+format = '[$symbol $context( \($namespace\))]($style) '
+
+[nix_shell]
+heuristic = true
+format = 'in $symbol$state( \($name\)) '
+symbol = '❄️ '
+
+[memory_usage]
+disabled = false
+threshold = 0
+format = "$symbol[$ram_pct( | $swap)]($style) "
 
 [env_var.K8S]
-format = "[⚓k8s]($style) "
+format = "[⚓ k8s]($style) "
 style = "bold blue"
