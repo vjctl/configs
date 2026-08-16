@@ -32,6 +32,7 @@ if test -f "$rc_file"; then
       echo "export NODE_EXTRA_CA_CERTS=\"\$SSL_CERT\"" >> "$rc_file"
       echo "export JAVA_OPTS=\"-Djavax.net.ssl.trustStore=\$SSL_CERT\"" >> "$rc_file"
       echo "export GIT_SSL_CAINFO=\"\$SSL_CERT\"" >> "$rc_file"
+      echo "export NIX_SSL_CERT_FILE=\"\$SSL_CERT\"" >> "$rc_file"
       echo "git config --global http.sslCAInfo \"\$SSL_CERT\"" >> "$rc_file"
       printf '\nExported SSL variables to %s\n' "$rc_file" >&2
     else
