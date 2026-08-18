@@ -8,27 +8,6 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "language_models": {
-    "openai_compatible": {
-      "custom": {
-        "api_url": "https://open-ai-compatible.com/api",
-        "available_models": [
-          {
-            "name": "gpt-4o",
-            "max_tokens": 200000,
-            "max_output_tokens": 32000,
-            "max_completion_tokens": 200000,
-            "capabilities": {
-              "tools": true,
-              "images": false,
-              "parallel_tool_calls": false,
-              "prompt_cache_key": false,
-              "chat_completions": true,
-              "interleaved_reasoning": false
-            }
-          }
-        ]
-      }
-    },
     "bedrock": {
       "authentication_method": "api_key",
       "region": "eu-west-1"
@@ -54,6 +33,11 @@
   "format_on_save": "off",
   "vim_mode": true,
   "edit_predictions": {
+    "open_ai_compatible_api": {
+      "model": "",
+      "api_url": ""
+    },
+    "allow_data_collection": "no",
     "provider": "copilot",
   },
   "ui_font_weight": 550.0,
@@ -66,6 +50,10 @@
   },
   "cursor_shape": "bar",
   "agent": {
+    "auto_compact": {
+      "threshold": "60%"
+    },
+    "show_turn_stats": true,
     "sandbox_permissions": {
       "allow_unsandboxed": true
     },
@@ -93,25 +81,25 @@
       },
       "type": "registry"
     },
-    "goose": {
-      "type": "registry"
-    },
-    "opencode": {
-      "type": "registry"
-    },
     "github-copilot-cli": {
       "default_config_options": {
         "model": "auto"
       },
+      "type": "registry"
+    },
+    "opencode": {
       "favorite_config_option_values": {
-        "allow_all": [
-          "off"
-        ],
         "model": [
           "auto"
         ]
       },
-      "type": "registry",
+      "type": "registry"
+    },
+    "goose": {
+      "default_config_options": {
+        "provider": "goose"
+      },
+      "type": "registry"
     },
   },
   "auto_update": true,
@@ -124,6 +112,7 @@
     "icons-modern-material": true,
     "zedokai": true,
     "material-icon-theme": true,
+    "zed-markdownlint": true,
   },
   "session": {
     "trust_all_worktrees": true,
