@@ -50,6 +50,10 @@
   },
   "cursor_shape": "bar",
   "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
+    "default_profile": "write",
     "auto_compact": {
       "threshold": "60%"
     },
@@ -58,7 +62,6 @@
       "allow_unsandboxed": true
     },
     "thinking_display": "always_expanded",
-    "sidebar_side": "right",
     "dock": "right",
     "flexible": false,
     "default_model": {
@@ -74,9 +77,15 @@
   "buffer_font_size": 21.0,
   "agent_servers": {
     "cursor": {
+      "favorite_config_option_values": {
+        "mode": [
+          "ask"
+        ]
+      },
       "default_config_options": {
-        "model": "auto",
+        "reasoning": "medium",
         "mode": "ask",
+        "model": "auto-smart",
         "optimize_for": "intelligence"
       },
       "type": "registry"
@@ -88,15 +97,19 @@
       "type": "registry"
     },
     "opencode": {
+      "default_config_options": {
+        "model": "cursor-acp/auto"
+      },
       "favorite_config_option_values": {
         "model": [
-          "auto"
+          "cursor-acp/auto"
         ]
       },
       "type": "registry"
     },
     "goose": {
       "default_config_options": {
+        "model": "auto",
         "provider": "goose"
       },
       "type": "registry"
@@ -112,7 +125,6 @@
     "icons-modern-material": true,
     "zedokai": true,
     "material-icon-theme": true,
-    "zed-markdownlint": true,
   },
   "session": {
     "trust_all_worktrees": true,
@@ -122,14 +134,13 @@
     "metrics": false,
   },
   "terminal": {
+    "default_height": 450.0,
+    "cursor_shape": "underline",
     "button": true,
     "copy_on_select": true,
-    "shell": "system",
     "show_count_badge": true,
     "font_size": 21.0,
     "font_family": "UbuntuMono Nerd Font",
-    "cursor_shape": "block",
-    "blinking": "on",
   },
   "autosave": {
     "after_delay": {

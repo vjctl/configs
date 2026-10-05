@@ -26,7 +26,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 alias code='cursor'
 alias dev='cd $HOME/Work/Git'
 alias sts='sh $HOME/Work/scripts/aws_sts.sh'
-alias refresh='source ~/.zshrc'
+alias refresh='source $HOME/.zshrc'
+alias rc='code -e "$HOME/.zshrc"'
 alias k='kubecolor'
 alias kx='kubectx'
 alias tg='terragrunt'
@@ -88,3 +89,13 @@ if [[ -n "$HERDR_TAB_ID" ]]; then
   add-zsh-hook preexec _herdr_preexec
   add-zsh-hook precmd _herdr_precmd
 fi
+
+hdr() {
+    local dir_name="${PWD:t}"
+    herdr --session "$dir_name"
+    direnv allow
+}
+
+hs() {
+    herdr server stop
+}
