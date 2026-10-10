@@ -3,10 +3,10 @@
 
 # Inserts a blank line between shell prompts
 add_newline = true
-
+ 
 # Timeout for commands executed by starship (in milliseconds).
 command_timeout = 3600000
-
+ 
 # Timeout for starship to scan files (in milliseconds).
 scan_timeout = 500
 
@@ -95,24 +95,24 @@ format = 'on [$symbol $branch ]($style)'
 
 [git_status]
 format = '([\[$ahead_behind$all_status\]]($style) )'
-stashed = "[${count}*](green)"
-modified = "[${count}+](yellow)"
-deleted =  "[${count}-](cyan)"
-conflicted =  "[${count}~](red)"
+stashed = "[${count}*](green)" 
+modified = "[${count}+](yellow)" 
+deleted =  "[${count}-](cyan)" 
+conflicted =  "[${count}~](red)" 
 ahead = "${count}↑"
 behind = "${count}↓"
-untracked = "[${count}?](blue)"
-staged = "[${count}+](green)"
+untracked = "[${count}?](blue)" 
+staged = "[${count}+](green)" 
 
 [git_state]
 style =	"bold red"
 format = "[$state( $progress_current/$progress_total) ]($style)"
 rebase = "rebase"
-merge = "merge"
-revert = "revert"
+merge = "merge"	
+revert = "revert"	
 cherry_pick = "cherry"
-bisect = "bisect"
-am = "am"
+bisect = "bisect"	
+am = "am"	
 am_or_rebase = "am/rebase"
 
 [python]
@@ -139,20 +139,16 @@ disabled = true
 
 [kubernetes]
 disabled = false
-style = "#0b60ff"
+style = "#337aff"
 symbol = "☸️ "
 format = '[$symbol $context( \($namespace\))]($style) '
 
 [nix_shell]
 heuristic = true
-format = 'in $symbol$state( \($name\)) '
+format = 'on $symbol$state( \($name\)) '
 symbol = '❄️ '
 
 [memory_usage]
 disabled = false
 threshold = 0
 format = "$symbol[$ram_pct( | $swap)]($style) "
-
-[env_var.K8S]
-format = "[⚓ k8s]($style) "
-style = "bold blue"

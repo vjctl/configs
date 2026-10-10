@@ -1,4 +1,4 @@
-## Configurations
+## Zed
 ```bash
 cp ~/.config/zed/*.json zed/
 

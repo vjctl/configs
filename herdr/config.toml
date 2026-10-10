@@ -1,0 +1,50 @@
+onboarding = false
+
+[theme]
+name = "tokyo-night"
+auto_switch = false
+
+[ui]
+agent_panel_sort = "priority"
+status_indicators = "symbols"
+
+[[keys.command]]
+key = "prefix+t"
+type = "popup"
+command = '''
+printf '\n  a) Split right\n  b) New tab\n  q) Cancel\n\nChoose: '
+IFS= read -r choice || exit 0
+case "$choice" in
+  a) herdr pane split --pane "${HERDR_ACTIVE_PANE_ID:?No active pane}" --direction right --focus ;;
+  b) herdr tab create --focus ;;
+  q|Q) ;;
+  *) printf 'Invalid choice: %s\n' "$choice" >&2; exit 2 ;;
+esac
+'''
+description = "menu"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "prefix+m"
+type = "shell"
+command = "herdr tab create --focus"
+description = "new tab"
+
+[theme.custom]
+accent = "#4d9375"
+panel_bg = "#222222"
+surface0 = "#2f363d"
+surface1 = "#444d56"
+surface_dim = "#292929"
+overlay0 = "#777777"
+overlay1 = "#959da5"
+text = "#dbd7ca"
+subtext0 = "#bfbaaa"
+mauve = "#d9739f"
+green = "#4d9375"
+yellow = "#e6cc77"
+red = "#cb7676"
+blue = "#6394bf"
+teal = "#5eaab5"
+peach = "#d4976c"
