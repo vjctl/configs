@@ -1,0 +1,24 @@
+{
+  "lastChangelogVersion": "1.3.0",
+  "packages": [
+    "npm:@plannotator/pi-extension",
+    "npm:pi-cursor-sdk",
+    "npm:pi-split-view",
+    "npm:pi-atelier",
+    "git:github.com/earendil-works/pi-review",
+    "npm:@ogulcancelik/pi-herdr",
+    "npm:@ollama/pi-web-search",
+    "npm:@upstash/context7-pi",
+    "npm:pi-observational-memory",
+    "npm:pi-prompt-storage"
+  ],
+  "defaultThinkingLevel": "medium",
+  "defaultProvider": "github-copilot",
+  "defaultModel": "gpt-6-luna",
+  "quietStartup": true,
+  "enabledModels": [
+    "github-copilot/*",
+    "cursor/!(*claude-fable-5@*|*fable-5@*|*gpt-6-astra*)"
+  ],
+  "hideThinkingBlock": false
+}

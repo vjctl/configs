@@ -1,0 +1,154 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+ 
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 3600000
+ 
+# Timeout for starship to scan files (in milliseconds).
+scan_timeout = 500
+
+# Define the format/order of prompt elements
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$nix_shell\
+$docker_context\
+$python\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$conda\
+$meson\
+$spack\
+$crystal\
+$custom\
+$status\
+$os\
+$battery\
+$kubernetes\
+$env_var\
+$cmd_duration
+[╰─](white)$time$character\
+"""
+
+right_format = """
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$memory_usage\
+"""
+
+[character]
+success_symbol = '[ ❯](green)'
+error_symbol = '[ ❯](red)'
+
+[git_branch]
+symbol = ""
+style = "purple"
+format = 'on [$symbol $branch ]($style)'
+
+[git_status]
+format = '([\[$ahead_behind$all_status\]]($style) )'
+stashed = "[${count}*](green)" 
+modified = "[${count}+](yellow)" 
+deleted =  "[${count}-](cyan)" 
+conflicted =  "[${count}~](red)" 
+ahead = "${count}↑"
+behind = "${count}↓"
+untracked = "[${count}?](blue)" 
+staged = "[${count}+](green)" 
+
+[git_state]
+style =	"bold red"
+format = "[$state( $progress_current/$progress_total) ]($style)"
+rebase = "rebase"
+merge = "merge"	
+revert = "revert"	
+cherry_pick = "cherry"
+bisect = "bisect"	
+am = "am"	
+am_or_rebase = "am/rebase"
+
+[python]
+pyenv_version_name = false
+python_binary = "python"
+style = "green"
+
+# Show current directory
+[directory]
+style = "#93e545"
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+# Show time
+[time]
+disabled = false
+style = "white"
+format = "[$time]($style)"
+
+# Disable Terraform workspace and version display
+[terraform]
+disabled = true
+
+[kubernetes]
+disabled = false
+style = "#337aff"
+symbol = "☸️ "
+format = '[$symbol $context( \($namespace\))]($style) '
+
+[nix_shell]
+heuristic = true
+format = 'on $symbol$state( \($name\)) '
+symbol = '❄️ '
+
+[memory_usage]
+disabled = false
+threshold = 0
+format = "$symbol[$ram_pct( | $swap)]($style) "

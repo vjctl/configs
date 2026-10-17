@@ -1,0 +1,10 @@
+{
+  "split": true,
+  "thinking": true,
+  "tools": true,
+  "files": false,
+  "toolMode": "full",
+  "trimResponse": true,
+  "bandHeight": 10,
+  "toolsWidthPct": 50
+}

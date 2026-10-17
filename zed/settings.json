@@ -1,0 +1,157 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "language_models": {
+    "bedrock": {
+      "authentication_method": "api_key",
+      "region": "eu-west-1"
+    }
+  },
+  "vim": {
+    "default_mode": "insert"
+  },
+  "diff_view_style": "unified",
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "format_on_save": "off",
+  "vim_mode": true,
+  "edit_predictions": {
+    "open_ai_compatible_api": {
+      "model": "",
+      "api_url": ""
+    },
+    "allow_data_collection": "no",
+    "provider": "copilot",
+  },
+  "ui_font_weight": 550.0,
+  "agent_buffer_font_size": 20.0,
+  "ui_font_size": 21.0,
+  "icon_theme": {
+    "mode": "system",
+    "light": "Material Icon Theme",
+    "dark": "Icons modern material (Dark)",
+  },
+  "cursor_shape": "bar",
+  "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
+    "default_profile": "write",
+    "auto_compact": {
+      "threshold": "60%"
+    },
+    "show_turn_stats": true,
+    "sandbox_permissions": {
+      "allow_unsandboxed": true
+    },
+    "thinking_display": "always_expanded",
+    "dock": "right",
+    "flexible": false,
+    "default_model": {
+      "provider": "custom",
+      "model": "gpt-4o",
+      "enable_thinking": false,
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+    "enable_feedback": false,
+  },
+  "ui_font_family": "UbuntuMono Nerd Font",
+  "buffer_font_size": 21.0,
+  "agent_servers": {
+    "cursor": {
+      "favorite_config_option_values": {
+        "mode": [
+          "ask"
+        ]
+      },
+      "default_config_options": {
+        "reasoning": "medium",
+        "mode": "ask",
+        "model": "auto-smart",
+        "optimize_for": "intelligence"
+      },
+      "type": "registry"
+    },
+    "github-copilot-cli": {
+      "default_config_options": {
+        "model": "auto"
+      },
+      "type": "registry"
+    },
+    "opencode": {
+      "default_config_options": {
+        "model": "cursor-acp/auto"
+      },
+      "favorite_config_option_values": {
+        "model": [
+          "cursor-acp/auto"
+        ]
+      },
+      "type": "registry"
+    },
+    "goose": {
+      "default_config_options": {
+        "model": "auto",
+        "provider": "goose"
+      },
+      "type": "registry"
+    },
+  },
+  "auto_update": true,
+  "auto_install_extensions": {
+    "dockerfile": true,
+    "git-firefly": true,
+    "log": true,
+    "nix": true,
+    "terraform": true,
+    "icons-modern-material": true,
+    "zedokai": true,
+    "material-icon-theme": true,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "terminal": {
+    "default_height": 450.0,
+    "cursor_shape": "underline",
+    "button": true,
+    "copy_on_select": true,
+    "show_count_badge": true,
+    "font_size": 21.0,
+    "font_family": "UbuntuMono Nerd Font",
+  },
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000,
+    },
+  },
+  "buffer_font_family": "UbuntuMono Nerd Font",
+  "base_keymap": "VSCode",
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Zedokai Darker (Filter Spectrum)",
+  },
+}
