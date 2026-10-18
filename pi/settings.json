@@ -17,8 +17,13 @@
   "defaultModel": "gpt-6-luna",
   "quietStartup": true,
   "enabledModels": [
-    "github-copilot/*",
-    "cursor/!(*claude-fable-5@*|*fable-5@*|*gpt-6-astra*)"
+    "github-copilot/!(*fable*)",
+    "cursor/!(*fable*|*gpt-6-astra*)"
   ],
-  "hideThinkingBlock": false
+  "hideThinkingBlock": false,
+  "enableInstallTelemetry": false,
+  "tuiMode": "fullscreen",
+  "terminal": {
+    "showTerminalProgress": true
+  }
 }
