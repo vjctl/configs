@@ -1,0 +1,22 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+*.logs
+
+# Env
+.env
+.env.local
+.envrc
+.direnv/
+
+# Agents
+.agents/
+.cursor/
+plan.md

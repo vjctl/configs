@@ -1,0 +1,29 @@
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[http]
+	sslCAInfo = /etc/ssl/certs/ca-certificates.crt
+	sslBackend = openssl
+[core]
+	hooksPath = ~/.config/git/hooks
+	excludesfile = ~/.config/git/ignore
+[fetch]
+	prune = true
+[credential]
+	gitHubAccountFiltering = false
+
+[include]
+	path = "~/.config/git/config.local"
+[includeIf "gitdir:~/devel/learn/"]
+	path = ~/.config/git/config-ctl
+[includeIf "hasconfig:remote.*.url:https://github.com/vjctl/**"]
+	path = ~/.config/git/config-ctl
