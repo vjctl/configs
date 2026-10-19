@@ -9,7 +9,8 @@
     "npm:@ogulcancelik/pi-herdr",
     "npm:@upstash/context7-pi",
     "npm:pi-observational-memory",
-    "npm:pi-prompt-storage"
+    "npm:pi-prompt-storage",
+    "npm:@demigodmode/pi-web-agent"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
