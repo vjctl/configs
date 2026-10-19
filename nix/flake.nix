@@ -94,11 +94,14 @@
             manual.html.enable = false;
             manual.json.enable = false;
 
-            # # Dotfile Symlinks
+            # Dotfile Symlinks
             # xdg.configFile = {
             #   "herdr/config.toml".source = ./sources/herdr/config.toml;
             #   "starship.toml".source = ./sources/starship/starship.toml;
             # };
+
+            # for zsh-autocomplete
+            xdg.dataFile."zsh/.keep".text = "";
 
             # Nix Packages
             home.packages = with pkgs; [
