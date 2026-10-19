@@ -19,4 +19,5 @@ Thumbs.db
 # Agents
 .agents/
 .cursor/
-plan.md
+plan*.md
+plan*/

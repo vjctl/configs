@@ -106,8 +106,18 @@ hdr() {
     if [[ -n "$workspace_id" ]]; then
         HERDR_SESSION="$session" herdr workspace focus "$workspace_id" >/dev/null || return
     else
-        HERDR_SESSION="$session" herdr workspace create --cwd "$PWD" --label "$dir_name" --focus >/dev/null || return
+        HERDR_SESSION="$session" herdr workspace create --cwd "$PWD" --label "$dir_name" >/dev/null || return
     fi
 
     env -u HERDR_ENV HERDR_SESSION="$session" herdr "$@"
+}
+
+hdrs() {
+    local session="${PWD:t}"
+    env -u HERDR_ENV herdr --session "$session" "$@"
+}
+
+hs() {
+    local session="${HERDR_SESSION:-${PWD:t}}"
+    herdr session stop "$session"
 }
