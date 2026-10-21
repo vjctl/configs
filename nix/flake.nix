@@ -92,6 +92,8 @@
             home.sessionVariables = {
               HOMEBREW_NO_AUTO_UPDATE = "1";
               HOMEBREW_NO_ENV_HINTS = "1";
+              TENV_AUTO_INSTALL = "true";
+              EDITOR = "vi";
             };
             manual.manpages.enable = false;
             manual.html.enable = false;
