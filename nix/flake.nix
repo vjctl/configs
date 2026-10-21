@@ -61,9 +61,7 @@
 
             taps = [];
 
-            brews = [
-              "herdr"
-            ];
+            brews = [];
 
             casks = [
               "1password"
@@ -114,6 +112,7 @@
               azure-cli
               docker-credential-helpers
               eksctl
+              herdr
               gnupg
               imagemagick
               jq
