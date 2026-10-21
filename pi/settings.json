@@ -10,7 +10,8 @@
     "npm:@upstash/context7-pi",
     "npm:pi-observational-memory",
     "npm:pi-prompt-storage",
-    "npm:@demigodmode/pi-web-agent"
+    "npm:@demigodmode/pi-web-agent",
+    "npm:pi-sandbox"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
@@ -21,9 +22,5 @@
     "cursor/!(*fable*|*gpt-6-astra*)"
   ],
   "hideThinkingBlock": false,
-  "enableInstallTelemetry": false,
-  "tuiMode": "fullscreen",
-  "terminal": {
-    "showTerminalProgress": true
-  }
+  "enableInstallTelemetry": false
 }

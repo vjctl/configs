@@ -51,8 +51,11 @@
           homebrew = {
             enable = true;
             onActivation = {
-              autoUpdate = true;
-              upgrade = true;
+              autoUpdate = false;
+              upgrade = false;
+              extraEnv = {
+                HOMEBREW_NO_AUTO_UPDATE = "1";
+              };
               cleanup = "zap";
             };
 
@@ -120,6 +123,8 @@
               pgcli
               pkgs.pi
               pomerium-cli
+              ripgrep
+              tenv
               uv
               watch
               wget
