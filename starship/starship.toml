@@ -152,3 +152,7 @@ symbol = '❄️ '
 disabled = false
 threshold = 0
 format = "$symbol[$ram_pct( | $swap)]($style) "
+
+[aws]
+force_display = true
+format = '[$symbol$profile( @ $region)]($style) '
