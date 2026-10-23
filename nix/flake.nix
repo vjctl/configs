@@ -10,7 +10,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    pi.url = "github:earendil-works/pi/v1.3.0";
+    pi.url = "github:earendil-works/pi/v1.4.0";
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, pi }:
@@ -126,7 +126,14 @@
               pomerium-cli
               ripgrep
               tenv
-              uv
+              (stdenvNoCC.mkDerivation {
+                name = "uv-0.13.5";
+                src = fetchurl {
+                  url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-aarch64-apple-darwin.tar.gz";
+                  hash = "sha256-dD+FA1oZluyzUGWeAc2frqlwmCm+CbG0sDxz6vPJzXM=";
+                };
+                installPhase = "install -Dm755 uv uvx -t $out/bin";
+              })
               watch
               wget
               yq-go
