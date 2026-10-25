@@ -23,9 +23,9 @@ eval "$(pyenv init - zsh)"
 source $ZSH/oh-my-zsh.sh
 export PYENV_ROOT="$HOME/.pyenv"
 # RPS1='$(kube_ps1)'
-alias code='cursor'
-alias dev='cd $HOME/Work/Git'
-alias sts='sh $HOME/Work/scripts/aws_sts.sh'
+alias code='zed'
+alias dev='cd $HOME/devel/'
+alias sts='sh $HOME/devel/learn/configs/utils/aws_sts.sh
 alias refresh='source $HOME/.zshrc'
 alias rc='code -e "$HOME/.zshrc"'
 alias k='kubecolor'
@@ -35,8 +35,9 @@ alias tgfmt='terragrunt hclfmt --terragrunt-check --terragrunt-diff'
 alias tf='terraform'
 alias spyder='nohup spyder --new-instance option & disown'
 alias notebook='nohup jupyter-notebook & disown'
-alias jupyter='docker rm pyspark && docker run -d -p 8888:8888 -e NB_UID=1000 -e GRANT_SUDO=yes --user root --name pyspark -v $HOME/Work/Git:/home/jovyan/work jupyter/pyspark-notebook && docker logs pyspark'export PATH="/usr/local/opt/libpq/bin:$PATH"
+alias jupyter='docker rm pyspark && docker run -d -p 8888:8888 -e NB_UID=1000 -e GRANT_SUDO=yes --user root --name pyspark -v $HOME/devel/:/home/jovyan/devel jupyter/pyspark-notebook && docker logs pyspark'export PATH="/usr/local/opt/libpq/bin:$PATH"
 alias activate_poetry="source \"\$(poetry env list --full-path | grep Activated | cut -d' ' -f1 )/bin/activate\""
+alias pi='$HOME/devel/learn/configs/pi/sandbox.sh'
 
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/libpq/lib"
@@ -120,4 +121,10 @@ hdrs() {
 hs() {
     local session="${HERDR_SESSION:-${PWD:t}}"
     herdr session stop "$session"
+}
+
+sbx() {
+  env > /tmp/host.env
+  docker run -it --rm --env-file /tmp/host.env -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro ubuntu:latest
+  rm -f /tmp/host.env
 }
