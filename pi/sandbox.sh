@@ -11,6 +11,8 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 RUN npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+RUN npm install -g typescript typescript-language-server
+RUN uv tool install python-lsp-server && uv tool install basedpyright
 
 ENTRYPOINT ["pi"]
 DOCKERFILE

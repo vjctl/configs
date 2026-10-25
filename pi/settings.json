@@ -7,7 +7,8 @@
     "npm:pi-atelier",
     "npm:@upstash/context7-pi",
     "npm:pi-prompt-storage",
-    "npm:@demigodmode/pi-web-agent"
+    "npm:@demigodmode/pi-web-agent",
+    "npm:pi-lsp-extension"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",

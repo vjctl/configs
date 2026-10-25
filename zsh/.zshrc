@@ -37,7 +37,7 @@ alias spyder='nohup spyder --new-instance option & disown'
 alias notebook='nohup jupyter-notebook & disown'
 alias jupyter='docker rm pyspark && docker run -d -p 8888:8888 -e NB_UID=1000 -e GRANT_SUDO=yes --user root --name pyspark -v $HOME/devel/:/home/jovyan/devel jupyter/pyspark-notebook && docker logs pyspark'export PATH="/usr/local/opt/libpq/bin:$PATH"
 alias activate_poetry="source \"\$(poetry env list --full-path | grep Activated | cut -d' ' -f1 )/bin/activate\""
-alias pi='$HOME/devel/learn/configs/pi/sandbox.sh'
+alias pii='$HOME/devel/learn/configs/pi/sandbox.sh'
 
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 export LDFLAGS="-L/usr/local/opt/libpq/lib"

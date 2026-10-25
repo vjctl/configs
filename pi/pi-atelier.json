@@ -1,7 +1,7 @@
 {
   "showSidebarToolNames": true,
-  "preset": "custom",
-  "density": "compact",
+  "preset": "classic",
+  "density": "comfortable",
   "segmentLayout": [
     {
       "id": "brand",
@@ -17,7 +17,7 @@
     },
     {
       "id": "performance",
-      "visible": true
+      "visible": false
     },
     {
       "id": "context",

@@ -1,10 +1,12 @@
 {
-  "split": true,
-  "thinking": true,
-  "tools": true,
+  "split": false,
+  "thinking": false,
+  "tools": false,
   "files": false,
   "toolMode": "full",
-  "trimResponse": true,
+  "trimResponse": false,
   "bandHeight": 10,
-  "toolsWidthPct": 50
+  "toolsWidthPct": 50,
+  "diff": true,
+  "answerDivider": "rule"
 }
