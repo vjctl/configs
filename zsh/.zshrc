@@ -123,7 +123,7 @@ hs() {
     herdr session stop "$session"
 }
 
-sbx() {
+csbx() {
   env > /tmp/host.env
   docker run -it --rm --env-file /tmp/host.env -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro ubuntu:latest
   rm -f /tmp/host.env

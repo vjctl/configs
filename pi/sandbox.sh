@@ -31,6 +31,7 @@ exec docker run --rm -it \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
   --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME)$') \
+  -e XDG_STATE_HOME=/root/.pi \
   --mount "type=bind,src=${HOME},dst=/root,readonly" \
   --mount "type=bind,src=${PWD},dst=${PWD}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
