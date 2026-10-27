@@ -8,7 +8,8 @@ case "$(docker info --format '{{.Architecture}}')" in
   aarch64) PLATFORM_ARCH=arm64 ;;
 esac
 
-docker buildx build --load --platform "linux/$PLATFORM_ARCH" -t "$IMAGE:$PLATFORM_ARCH" - <<'DOCKERFILE'
+if ! docker image inspect "$IMAGE:$PLATFORM_ARCH" >/dev/null 2>&1; then
+  docker buildx build --load --platform "linux/$PLATFORM_ARCH" -t "$IMAGE:$PLATFORM_ARCH" - <<'DOCKERFILE'
 FROM node:lts-bookworm-slim
 COPY --from=astral/uv:0.13.5 /uv /uvx /usr/local/bin/
 
@@ -40,6 +41,7 @@ RUN npm install -g --ignore-scripts \
 
 ENTRYPOINT ["pi"]
 DOCKERFILE
+fi
 
 export GH_TOKEN="$(gh auth token)"
 
@@ -61,4 +63,5 @@ exec docker run --rm -it --platform "linux/$PLATFORM_ARCH" \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
   --workdir "${PWD}" \
   -e GH_TOKEN \
-  "$IMAGE:$PLATFORM_ARCH"
+  "$IMAGE:$PLATFORM_ARCH" \
+  "$@"
