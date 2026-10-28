@@ -122,6 +122,7 @@
               kubernetes-helm
               nodejs_22
               pgcli
+              pngpaste
               # pkgs.pi
               pomerium-cli
               ripgrep
