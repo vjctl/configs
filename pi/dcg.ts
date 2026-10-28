@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 import { isToolCallEventType } from "@earendil-works/pi-coding-agent";
 
 const DCG_BIN = process.env.DCG_BIN ?? "dcg";
@@ -29,23 +29,36 @@ function dcgBlockReason(command: string): Promise<string | undefined> {
   });
 }
 
+async function checkCommand(command: string, ctx: ExtensionContext): Promise<string | undefined> {
+  const reason = await dcgBlockReason(command);
+  if (!reason) return;
+
+  // No UI (print/RPC mode): nobody to ask, deny outright.
+  const choice = ctx.hasUI
+    ? await ctx.ui.select(`DCG:\n\n  ${reason}\n\n  command: ${command}\n`, [BLOCK, ALLOW_ONCE])
+    : BLOCK;
+  return choice === ALLOW_ONCE ? undefined : reason;
+}
+
 export default function (pi: ExtensionAPI) {
   pi.on("tool_call", async (event, ctx) => {
     if (!isToolCallEventType("bash", event)) return;
     const command = event.input.command;
     if (!command?.trim()) return;
 
-    const reason = await dcgBlockReason(command);
+    const reason = await checkCommand(command, ctx);
+    if (reason) return { block: true, reason };
+  });
+
+  pi.on("user_bash", async (event, ctx) => {
+    const command = event.command;
+    if (!command.trim()) return;
+
+    const reason = await checkCommand(command, ctx);
     if (!reason) return;
 
-    // No UI (print/RPC mode): nobody to ask, deny outright.
-    if (!ctx.hasUI) return { block: true, reason };
-
-    const choice = await ctx.ui.select(`DCG:\n\n  ${reason}\n\n  command: ${command}\n`, [
-      BLOCK,
-      ALLOW_ONCE,
-    ]);
-    if (choice === ALLOW_ONCE) return;
-    return { block: true, reason: `${reason}` };
+    return {
+      result: { output: `${reason}\n`, exitCode: 1, cancelled: false, truncated: false },
+    };
   });
 }
