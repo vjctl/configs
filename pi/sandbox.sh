@@ -110,6 +110,7 @@ docker run --rm -it \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
   --mount "type=bind,src=${CLIP},dst=/clip,readonly" \
   --mount "type=bind,src=${CLIP}/xclip,dst=/usr/local/bin/xclip,readonly" \
+  --mount "type=bind,src=${SSL_CERT},dst=${SSL_CERT},readonly" \
   --workdir "${PWD}" \
   -e GH_TOKEN \
   "$TAG" \
