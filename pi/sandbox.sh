@@ -38,6 +38,8 @@ RUN npm install -g --ignore-scripts \
       typescript-language-server \
   && uv tool install python-lsp-server \
   && uv tool install basedpyright
+RUN curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/destructive_command_guard/main/install.sh \
+  | bash -s -- --dest /usr/local/bin --no-configure --verify --quiet
 
 ENTRYPOINT ["pi"]
 DOCKERFILE
@@ -51,7 +53,26 @@ for p in $(seq 19430 19440); do
 done
 [ -n "$PORT" ] || { echo "No free port in 19430-19440" >&2; exit 1; }
 
-exec docker run --rm -it --platform "linux/$PLATFORM_ARCH" \
+
+CLIP="$(mktemp -d)"
+cat > "$CLIP/xclip" <<'SHIM'
+#!/bin/sh
+[ -s /clip/img.png ] || exit 1
+case "$*" in
+  *TARGETS*) echo image/png ;;
+  *image/png*) cat /clip/img.png ;;
+  *) exit 1 ;;
+esac
+SHIM
+chmod +x "$CLIP/xclip"
+while :; do pngpaste "$CLIP/img.png" 2>/dev/null || rm -f "$CLIP/img.png"; sleep 0.5; done &
+LOOP_PID=$!
+cleanup() { kill "$LOOP_PID" 2>/dev/null; rm -rf "$CLIP"; }
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM HUP
+
+docker run --rm -it --platform "linux/$PLATFORM_ARCH" \
   -e PLANNOTATOR_REMOTE=1 \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
@@ -61,6 +82,8 @@ exec docker run --rm -it --platform "linux/$PLATFORM_ARCH" \
   --mount "type=bind,src=${PWD},dst=${PWD}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
+  --mount "type=bind,src=${CLIP},dst=/clip,readonly" \
+  --mount "type=bind,src=${CLIP}/xclip,dst=/usr/local/bin/xclip,readonly" \
   --workdir "${PWD}" \
   -e GH_TOKEN \
   "$IMAGE:$PLATFORM_ARCH" \

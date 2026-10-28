@@ -10,7 +10,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    pi.url = "github:earendil-works/pi/v1.4.0";
+    pi.url = "github:earendil-works/pi/stable";
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, pi }:
@@ -65,6 +65,7 @@
 
             casks = [
               "1password"
+              "azure-cli"
               "docker-desktop"
               "google-chrome"
               "grammarly-desktop"
@@ -109,7 +110,6 @@
             # Nix Packages
             home.packages = with pkgs; [
               awscli2
-              azure-cli
               docker-credential-helpers
               eksctl
               herdr
@@ -122,7 +122,7 @@
               kubernetes-helm
               nodejs_22
               pgcli
-              pkgs.pi
+              # pkgs.pi
               pomerium-cli
               ripgrep
               tenv
@@ -136,6 +136,7 @@
               })
               watch
               wget
+              ytt
               yq-go
             ];
 

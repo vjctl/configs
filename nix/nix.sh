@@ -37,7 +37,6 @@ fi
 echo "Setting up Nix $CONFIG_DIR"
 mkdir -p "$CONFIG_DIR"
 cp "$SCRIPT_DIR/flake.nix" "$CONFIG_DIR/flake.nix"
-cp "$SCRIPT_DIR/flake.lock" "$CONFIG_DIR/flake.lock"
 
 # Initialize Git
 cd "$CONFIG_DIR"
