@@ -10,11 +10,15 @@ export DOCKER_DEFAULT_PLATFORM="linux/$PLATFORM_ARCH"
 TAG="sandbox:$PLATFORM_ARCH"
 EXTENSIONS="sandbox-extensions-$PLATFORM_ARCH"
 CACHE="sandbox-cache-$PLATFORM_ARCH"
+SSL_CERT="/etc/ssl/certs/ca-certs.crt"
+SSL_CERT_ID="ssl_certs"
 docker volume create "$EXTENSIONS" >/dev/null
 docker volume create "$CACHE" >/dev/null
 
 docker image inspect "$TAG" >/dev/null 2>&1 ||
-  docker buildx build -t "$TAG" - <<'DOCKERFILE'
+  docker buildx build \
+    --secret "id=$SSL_CERT_ID,src=$SSL_CERT" \
+    -t "$TAG" - <<'DOCKERFILE'
 FROM node:lts-bookworm-slim
 COPY --from=astral/uv /uv /uvx /usr/local/bin/
 
@@ -22,7 +26,9 @@ ENV UV_PYTHON_INSTALL_DIR=/usr/local/share/uv/python \
     UV_PYTHON_BIN_DIR=/usr/local/bin \
     UV_TOOL_DIR=/usr/local/share/uv/tools \
     UV_TOOL_BIN_DIR=/usr/local/bin \
-    XDG_DATA_HOME=/usr/local/share/xdg
+    UV_SYSTEM_CERTS=true \
+    XDG_DATA_HOME=/usr/local/share/xdg \
+    NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
@@ -36,6 +42,12 @@ RUN apt-get install -y --no-install-recommends \
     jq \
     openssh-client \
     ripgrep
+
+RUN --mount=type=secret,id=ssl_certs,required=false \
+    if [ -f /run/secrets/ssl_certs ]; then \
+        cat /run/secrets/ssl_certs >> /etc/ssl/certs/ca-certificates.crt; \
+    fi
+
 RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
       | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main" \

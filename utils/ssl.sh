@@ -2,15 +2,22 @@
 set -euo pipefail
 
 SSL_CERT_DIR="/etc/ssl/certs"
-SSL_CERT="$SSL_CERT_DIR/ca-certificates.crt"
+SYSTEM_SSL_CERT="$SSL_CERT_DIR/ca-certificates.crt"
+SSL_CERT="$SSL_CERT_DIR/ca-certs.crt"
 mkdir -p "$SSL_CERT_DIR"
 security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain -o root.pem
 security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o custom.pem
-cat root.pem custom.pem | sudo tee "$SSL_CERT"
+cat root.pem custom.pem | sudo tee "$SSL_CERT" >/dev/null
+
+# if [[ -f "$SYSTEM_SSL_CERT" ]]; then
+#   cat "$SYSTEM_SSL_CERT" root.pem custom.pem | sudo tee "$SSL_CERT" >/dev/null
+# else
+#   cat root.pem custom.pem | sudo tee "$SSL_CERT" >/dev/null
+# fi
 
 rc_file="$HOME/.bashrc"
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  rc_file="$HOME/.zshrc"
+  rc_file="$HOME/.zshrc.local"
 fi
 
 if test -f "$rc_file"; then
@@ -19,7 +26,7 @@ if test -f "$rc_file"; then
     read -rp "Export SSL variables to $rc_file? [y/N] " answer
     if [[ "$answer" =~ ^[Yy]$ ]]; then
       mkdir -p ~/.aws
-      echo "[default]" > ~/.aws/config
+      echo "[default]" >> ~/.aws/config
       echo "ca_bundle = $SSL_CERT" >> ~/.aws/config
       echo "" >> "$rc_file"
       echo "$marker" >> "$rc_file"
