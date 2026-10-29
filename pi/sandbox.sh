@@ -44,6 +44,7 @@ RUN apt-get install -y --no-install-recommends \
     openssh-client \
     ripgrep
 
+# RUN git config --system credential.helper '!gh auth git-credential'
 RUN --mount=type=secret,id=ssl_certs,required=false \
     if [ -f /run/secrets/ssl_certs ]; then \
         cat /run/secrets/ssl_certs >> /etc/ssl/certs/ca-certificates.crt; \

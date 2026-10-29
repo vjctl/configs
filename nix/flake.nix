@@ -120,7 +120,7 @@
               kubecolor
               kubectl
               kubernetes-helm
-              nodejs_22
+              nodejs_24
               pgcli
               pngpaste
               # pkgs.pi
