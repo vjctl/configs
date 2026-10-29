@@ -124,7 +124,8 @@ hs() {
 }
 
 csbx() {
-  env > /tmp/host.env
-  docker run -it --rm --env-file /tmp/host.env -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro ubuntu:latest
-  rm -f /tmp/host.env
+  export SSL_CERT_FILE="${SSL_CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}"
+  docker run -it --rm \
+    --env-file <(compgen -e | tr ' ' '\n' | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME)$') \
+    -v "$SSL_CERT_FILE:$SSL_CERT_FILE:ro" ubuntu:latest
 }

@@ -6,18 +6,18 @@ case "$(docker info --format '{{.Architecture}}')" in
   aarch64) PLATFORM_ARCH=arm64 ;;
 esac
 
+export SSL_CERT_FILE="${SSL_CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}"
 export DOCKER_DEFAULT_PLATFORM="linux/$PLATFORM_ARCH"
 TAG="sandbox:$PLATFORM_ARCH"
 EXTENSIONS="sandbox-extensions-$PLATFORM_ARCH"
 CACHE="sandbox-cache-$PLATFORM_ARCH"
-SSL_CERT="/etc/ssl/certs/ca-certs.crt"
 SSL_CERT_ID="ssl_certs"
 docker volume create "$EXTENSIONS" >/dev/null
 docker volume create "$CACHE" >/dev/null
 
 docker image inspect "$TAG" >/dev/null 2>&1 ||
   docker buildx build \
-    --secret "id=$SSL_CERT_ID,src=$SSL_CERT" \
+    --secret "id=$SSL_CERT_ID,src=$SSL_CERT_FILE" \
     -t "$TAG" - <<'DOCKERFILE'
 FROM node:lts-bookworm-slim
 COPY --from=astral/uv /uv /uvx /usr/local/bin/
@@ -28,7 +28,8 @@ ENV UV_PYTHON_INSTALL_DIR=/usr/local/share/uv/python \
     UV_TOOL_BIN_DIR=/usr/local/bin \
     UV_SYSTEM_CERTS=true \
     XDG_DATA_HOME=/usr/local/share/xdg \
-    NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+    XDG_STATE_HOME=/root/.pi \
+    PLANNOTATOR_REMOTE=1
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
@@ -65,6 +66,16 @@ RUN npm install -g --ignore-scripts \
 RUN curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/destructive_command_guard/main/install.sh \
   | bash -s -- --dest /usr/local/bin --no-configure --verify --quiet
 
+COPY --chmod=755 <<'SHIM' /usr/local/bin/xclip
+#!/bin/sh
+[ -s /clip/img.png ] || exit 1
+case "$*" in
+  *TARGETS*) echo image/png ;;
+  *image/png*) cat /clip/img.png ;;
+  *) exit 1 ;;
+esac
+SHIM
+
 ENTRYPOINT ["pi"]
 DOCKERFILE
 
@@ -78,16 +89,6 @@ done
 
 
 CLIP="$(mktemp -d)"
-cat > "$CLIP/xclip" <<'SHIM'
-#!/bin/sh
-[ -s /clip/img.png ] || exit 1
-case "$*" in
-  *TARGETS*) echo image/png ;;
-  *image/png*) cat /clip/img.png ;;
-  *) exit 1 ;;
-esac
-SHIM
-chmod +x "$CLIP/xclip"
 while :; do pngpaste "$CLIP/img.png" 2>/dev/null || rm -f "$CLIP/img.png"; sleep 0.5; done &
 LOOP_PID=$!
 cleanup() { kill "$LOOP_PID" 2>/dev/null; rm -rf "$CLIP"; }
@@ -96,11 +97,9 @@ trap 'exit 130' INT
 trap 'exit 143' TERM HUP
 
 docker run --rm -it \
-  -e PLANNOTATOR_REMOTE=1 \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
   --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME)$') \
-  -e XDG_STATE_HOME=/root/.pi \
   --mount "type=bind,src=${HOME},dst=/root,readonly" \
   --mount "type=bind,src=${PWD},dst=${PWD}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
@@ -109,8 +108,7 @@ docker run --rm -it \
   --mount "type=volume,src=${CACHE}-gyp,dst=/root/.cache" \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
   --mount "type=bind,src=${CLIP},dst=/clip,readonly" \
-  --mount "type=bind,src=${CLIP}/xclip,dst=/usr/local/bin/xclip,readonly" \
-  --mount "type=bind,src=${SSL_CERT},dst=${SSL_CERT},readonly" \
+  --mount "type=bind,src=${SSL_CERT_FILE},dst=${SSL_CERT_FILE},readonly" \
   --workdir "${PWD}" \
   -e GH_TOKEN \
   "$TAG" \
