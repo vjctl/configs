@@ -189,6 +189,7 @@
                 dev = "cd $HOME/devel";
                 refresh = "source $HOME/.zshrc";
                 rc = "code -e \"$HOME/.zshrc.local\"";
+                aws-logout = "aws sso logout && unset AWS_PROFILE && kubectl config unset current-context";
               };
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
