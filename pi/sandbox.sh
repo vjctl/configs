@@ -55,9 +55,12 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
     && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main" \
       > /etc/apt/sources.list.d/hashicorp.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends terraform-ls \
+    && apt-get install -y --no-install-recommends terraform terraform-ls \
     && rm -rf /var/lib/apt/lists/*
-RUN uv python install \
+RUN curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/latest/download/terragrunt_linux_$(dpkg --print-architecture)" \
+  -o /usr/local/bin/terragrunt \
+ && chmod +x /usr/local/bin/terragrunt
+RUN uv python install 3.15 --default \
  && uv tool install python-lsp-server \
  && uv tool install basedpyright
 RUN npm install -g --ignore-scripts \

@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"]
+    },
+    "python": {
+      "command": "pylsp",
+      "args": []
+    },
+    "go": {
+      "command": "gopls",
+      "args": ["serve"]
+    },
+    "rust": {
+      "command": "rust-analyzer",
+      "args": []
+    },
+    "node": {
+      "command": "typescript-language-server",
+      "args": ["--stdio"]
+    }
+  }
+}

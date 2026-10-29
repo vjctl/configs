@@ -10,5 +10,5 @@ cp ~/.pi/agent/pi-atelier.json pi
 ```bash
 cp pi/*.json ~/.pi/agent/
 mkdir -p ~/.pi/agent/extensions
-cp pi/dcg.ts ~/.pi/agent/extensions/
+cp pi/*.ts ~/.pi/agent/extensions/
 ```
