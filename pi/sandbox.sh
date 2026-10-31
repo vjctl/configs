@@ -26,10 +26,7 @@ ENV UV_PYTHON_INSTALL_DIR=/usr/local/share/uv/python \
     UV_PYTHON_BIN_DIR=/usr/local/bin \
     UV_TOOL_DIR=/usr/local/share/uv/tools \
     UV_TOOL_BIN_DIR=/usr/local/bin \
-    UV_SYSTEM_CERTS=true \
-    XDG_DATA_HOME=/usr/local/share/xdg \
-    XDG_STATE_HOME=/root/.pi \
-    PLANNOTATOR_REMOTE=1
+    UV_SYSTEM_CERTS=true
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
@@ -42,7 +39,8 @@ RUN apt-get install -y --no-install-recommends \
     gnupg \
     jq \
     openssh-client \
-    ripgrep
+    ripgrep \
+    socat
 
 # RUN git config --system credential.helper '!gh auth git-credential'
 RUN --mount=type=secret,id=ssl_certs,required=false \
@@ -80,7 +78,18 @@ case "$*" in
 esac
 SHIM
 
-ENTRYPOINT ["pi"]
+ENV XDG_DATA_HOME=/usr/local/share/xdg \
+    XDG_STATE_HOME=/root/.pi \
+    PLANNOTATOR_REMOTE=1 \
+    OLLAMA_HOST=http://host.docker.internal:11434
+
+COPY --chmod=755 <<'ENTRY' /usr/local/bin/pi-entry
+#!/bin/sh
+socat TCP-LISTEN:11434,fork,reuseaddr,bind=127.0.0.1 TCP:host.docker.internal:11434 &
+exec pi "$@"
+ENTRY
+
+ENTRYPOINT ["pi-entry"]
 DOCKERFILE
 
 export GH_TOKEN="$(gh auth token)"
@@ -89,7 +98,7 @@ PORT=""
 for p in $(seq 19430 19440); do
   (exec 3<>"/dev/tcp/127.0.0.1/$p") 2>/dev/null || { PORT=$p; break; }
 done
-[ -n "$PORT" ] || { echo "No free port in 19430-19440" >&2; exit 1; }
+[ -n "$PORT" ] || { echo "No port in 19430-19440" >&2; exit 1; }
 
 
 CLIP="$(mktemp -d)"
@@ -101,6 +110,9 @@ trap 'exit 130' INT
 trap 'exit 143' TERM HUP
 
 docker run --rm -it \
+  --cap-drop=ALL \
+  --security-opt=no-new-privileges:true \
+  --pids-limit=1024 \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
   --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME)$') \
