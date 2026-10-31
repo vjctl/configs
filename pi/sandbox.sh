@@ -61,7 +61,8 @@ RUN curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/latest/downl
 RUN uv python install 3.15 --default \
  && uv tool install python-lsp-server \
  && uv tool install basedpyright
-RUN npm install -g --ignore-scripts \
+RUN npm install -g npm@latest \
+ && npm install -g --ignore-scripts \
     @earendil-works/pi-coding-agent \
     typescript \
     typescript-language-server
@@ -84,11 +85,11 @@ ENV HOME=/root \
     PLANNOTATOR_DATA_DIR=/root/.cache/plannotator \
     PLANNOTATOR_REMOTE=1 \
     OLLAMA_HOST=http://host.docker.internal:11434 \
-    npm_package_config_node_gyp_devdir=/usr/local
+    npm_package_config_node_gyp_devdir=/usr/local \
+    npm_config_cache=/root/.cache/npm
 
-RUN rm -rf /root/.npm /root/.cache \
- && mkdir -p /root/.npm /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
- && chmod 1777 /root/.npm /root/.cache /root/.pi/agent/npm /usr/local/share/xdg
+RUN mkdir -p /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
+ && chmod 1777 /root/.cache /root/.pi/agent/npm /usr/local/share/xdg
 
 COPY --chmod=755 <<'ENTRY' /usr/local/bin/pi-entry
 #!/bin/sh
@@ -129,8 +130,7 @@ docker run --rm -it \
   --mount "type=bind,src=${PWD},dst=${PWD}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
   --mount "type=volume,src=${EXTENSIONS},dst=/root/.pi/agent/npm" \
-  --mount "type=volume,src=${CACHE},dst=/root/.npm" \
-  --mount "type=volume,src=${CACHE}-gyp,dst=/root/.cache" \
+  --mount "type=volume,src=${CACHE},dst=/root/.cache" \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
   --mount "type=bind,src=${CLIP},dst=/clip,readonly" \
   --mount "type=bind,src=${SSL_CERT_FILE},dst=${SSL_CERT_FILE},readonly" \
