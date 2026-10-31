@@ -78,10 +78,17 @@ case "$*" in
 esac
 SHIM
 
-ENV XDG_DATA_HOME=/usr/local/share/xdg \
+ENV HOME=/root \
+    XDG_DATA_HOME=/usr/local/share/xdg \
     XDG_STATE_HOME=/root/.pi \
+    PLANNOTATOR_DATA_DIR=/root/.cache/plannotator \
     PLANNOTATOR_REMOTE=1 \
-    OLLAMA_HOST=http://host.docker.internal:11434
+    OLLAMA_HOST=http://host.docker.internal:11434 \
+    npm_package_config_node_gyp_devdir=/usr/local
+
+RUN rm -rf /root/.npm /root/.cache \
+ && mkdir -p /root/.npm /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
+ && chmod 1777 /root/.npm /root/.cache /root/.pi/agent/npm /usr/local/share/xdg
 
 COPY --chmod=755 <<'ENTRY' /usr/local/bin/pi-entry
 #!/bin/sh
@@ -112,10 +119,12 @@ trap 'exit 143' TERM HUP
 docker run --rm -it \
   --cap-drop=ALL \
   --security-opt=no-new-privileges:true \
-  --pids-limit=1024 \
+  --security-opt=seccomp=builtin \
+  --pids-limit=512 \
+  --user "$(id -u):$(id -g)" \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
-  --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME)$') \
+  --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME|VIRTUAL_ENV)$') \
   --mount "type=bind,src=${HOME},dst=/root,readonly" \
   --mount "type=bind,src=${PWD},dst=${PWD}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
