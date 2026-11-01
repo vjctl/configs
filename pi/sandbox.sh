@@ -117,7 +117,10 @@ trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM HUP
 
-docker run --rm -it \
+TTY_FLAGS=(-i)
+[ -t 0 ] && [ -t 1 ] && TTY_FLAGS=(-it)
+
+docker run --rm "${TTY_FLAGS[@]}" \
   --cap-drop=ALL \
   --security-opt=no-new-privileges:true \
   --security-opt=seccomp=builtin \

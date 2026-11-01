@@ -11,9 +11,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     pi.url = "github:earendil-works/pi/stable";
+    paseo.url = "github:getpaseo/paseo";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, pi }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, pi, paseo }:
   let
     sudoUser = builtins.getEnv "SUDO_USER";
     username =
@@ -124,6 +125,10 @@
               pgcli
               pngpaste
               # pkgs.pi
+              (writeShellScriptBin "pi" ''
+                exec "$HOME/devel/learn/configs/pi/sandbox.sh" "$@"
+              '')
+              paseo.packages.${system}.default
               pomerium-cli
               ripgrep
               tenv
