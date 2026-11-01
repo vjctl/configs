@@ -152,6 +152,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Zedokai Darker (Filter Spectrum)",
+    "dark": "Gruvbox Dark",
   },
 }

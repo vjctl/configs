@@ -2,12 +2,12 @@
   "lastChangelogVersion": "1.4.0",
   "packages": [
     "npm:@plannotator/pi-extension",
-    "npm:pi-split-view",
     "npm:pi-atelier",
     "npm:@upstash/context7-pi",
     "npm:pi-prompt-storage",
     "npm:pi-cursor-sdk",
-    "npm:@ollama/pi-web-search"
+    "npm:@ollama/pi-web-search",
+    "npm:pi-claude-code-ui"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
