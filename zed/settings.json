@@ -7,12 +7,6 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "language_models": {
-    "bedrock": {
-      "authentication_method": "api_key",
-      "region": "eu-west-1"
-    }
-  },
   "vim": {
     "default_mode": "insert"
   },
@@ -33,10 +27,6 @@
   "format_on_save": "off",
   "vim_mode": true,
   "edit_predictions": {
-    "open_ai_compatible_api": {
-      "model": "",
-      "api_url": ""
-    },
     "allow_data_collection": "no",
     "provider": "copilot",
   },
@@ -48,7 +38,6 @@
     "light": "Material Icon Theme",
     "dark": "Icons modern material (Dark)",
   },
-  "cursor_shape": "bar",
   "agent": {
     "threads_sidebar": {
       "position": "right"
@@ -59,18 +48,11 @@
     },
     "show_turn_stats": true,
     "sandbox_permissions": {
-      "allow_unsandboxed": true
+      "allow_unsandboxed": false
     },
     "thinking_display": "always_expanded",
     "dock": "right",
     "flexible": false,
-    "default_model": {
-      "provider": "custom",
-      "model": "gpt-4o",
-      "enable_thinking": false,
-    },
-    "favorite_models": [],
-    "model_parameters": [],
     "enable_feedback": false,
   },
   "ui_font_family": "UbuntuMono Nerd Font",
@@ -93,24 +75,6 @@
     "github-copilot-cli": {
       "default_config_options": {
         "model": "auto"
-      },
-      "type": "registry"
-    },
-    "opencode": {
-      "default_config_options": {
-        "model": "cursor-acp/auto"
-      },
-      "favorite_config_option_values": {
-        "model": [
-          "cursor-acp/auto"
-        ]
-      },
-      "type": "registry"
-    },
-    "goose": {
-      "default_config_options": {
-        "model": "auto",
-        "provider": "goose"
       },
       "type": "registry"
     },
