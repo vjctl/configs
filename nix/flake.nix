@@ -189,7 +189,6 @@
               ];
               shellAliases = {
                 k = "kubecolor";
-                kubectl = "kubecolor";
                 tg = "terragrunt";
                 tf = "terraform";
                 dev = "cd $HOME/devel";
