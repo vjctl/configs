@@ -8,9 +8,10 @@ esac
 
 export SSL_CERT_FILE="${SSL_CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}"
 export DOCKER_DEFAULT_PLATFORM="linux/$PLATFORM_ARCH"
-TAG="sandbox:$PLATFORM_ARCH"
-EXTENSIONS="sandbox-extensions-$PLATFORM_ARCH"
-CACHE="sandbox-cache-$PLATFORM_ARCH"
+IMAGE="pi"
+TAG="$IMAGE:$PLATFORM_ARCH"
+EXTENSIONS="$IMAGE-$PLATFORM_ARCH-extensions"
+CACHE="$IMAGE-$PLATFORM_ARCH-cache"
 SSL_CERT_ID="ssl_certs"
 docker volume create "$EXTENSIONS" >/dev/null
 docker volume create "$CACHE" >/dev/null
@@ -18,7 +19,8 @@ docker volume create "$CACHE" >/dev/null
 docker image inspect "$TAG" >/dev/null 2>&1 ||
   docker buildx build \
     --secret "id=$SSL_CERT_ID,src=$SSL_CERT_FILE" \
-    -t "$TAG" - <<'DOCKERFILE'
+    -t "$TAG" - <<'DOCKERFILE' \
+    --no-cache
 FROM node:lts-bookworm-slim
 COPY --from=astral/uv /uv /uvx /usr/local/bin/
 
