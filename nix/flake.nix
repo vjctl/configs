@@ -62,7 +62,9 @@
 
             taps = [];
 
-            brews = [];
+            brews = [
+              "tuios"
+            ];
 
             casks = [
               "1password"
@@ -113,7 +115,6 @@
               awscli2
               docker-credential-helpers
               eksctl
-              herdr
               gnupg
               imagemagick
               jq
@@ -133,10 +134,10 @@
               ripgrep
               tenv
               (stdenvNoCC.mkDerivation {
-                name = "uv-0.13.5";
+                name = "uv-0.13.6";
                 src = fetchurl {
-                  url = "https://github.com/astral-sh/uv/releases/download/0.13.5/uv-aarch64-apple-darwin.tar.gz";
-                  hash = "sha256-dD+FA1oZluyzUGWeAc2frqlwmCm+CbG0sDxz6vPJzXM=";
+                  url = "https://github.com/astral-sh/uv/releases/download/0.13.6/uv-aarch64-apple-darwin.tar.gz";
+                  hash = "sha256-YPvVyKHtaBhF7qKNnWIvzeA8UekaQ0ZbZKHhfbHtNHI=";
                 };
                 installPhase = "install -Dm755 uv uvx -t $out/bin";
               })
@@ -203,7 +204,6 @@
               };
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-                eval "$(herdr completion zsh)"
                 alias code=zed
                 if [[ -f "$HOME/.zshrc.local" ]]; then
                   source "$HOME/.zshrc.local"

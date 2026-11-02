@@ -9,6 +9,7 @@ Thumbs.db
 # Logs
 *.log
 *.logs
+*debug*
 
 # Env
 .env

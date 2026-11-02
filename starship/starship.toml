@@ -81,7 +81,6 @@ $aws\
 $gcloud\
 $openstack\
 $azure\
-$memory_usage\
 """
 
 [character]

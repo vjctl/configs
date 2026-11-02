@@ -6,8 +6,7 @@
     "npm:@upstash/context7-pi",
     "npm:pi-prompt-storage",
     "npm:pi-cursor-sdk",
-    "npm:@ollama/pi-web-search",
-    "npm:pi-claude-code-ui"
+    "npm:@ollama/pi-web-search"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
