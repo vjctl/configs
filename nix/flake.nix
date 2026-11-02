@@ -115,6 +115,7 @@
               awscli2
               docker-credential-helpers
               eksctl
+              herdr
               gnupg
               imagemagick
               jq
@@ -204,6 +205,7 @@
               };
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+                eval "$(herdr completion zsh)"
                 alias code=zed
                 if [[ -f "$HOME/.zshrc.local" ]]; then
                   source "$HOME/.zshrc.local"
