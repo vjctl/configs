@@ -18,9 +18,9 @@ docker volume create "$CACHE" >/dev/null
 
 docker image inspect "$TAG" >/dev/null 2>&1 ||
   docker buildx build \
+    --no-cache \
     --secret "id=$SSL_CERT_ID,src=$SSL_CERT_FILE" \
     -t "$TAG" - <<'DOCKERFILE' \
-    --no-cache
 FROM node:lts-bookworm-slim
 COPY --from=astral/uv /uv /uvx /usr/local/bin/
 
