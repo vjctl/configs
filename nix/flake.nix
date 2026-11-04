@@ -61,9 +61,7 @@
 
             taps = [];
 
-            brews = [
-              "tuios"
-            ];
+            brews = [];
 
             casks = [
               "1password"
@@ -135,7 +133,7 @@
               (writeShellScriptBin "pi" ''
                 exec "$HOME/devel/learn/configs/pi/sandbox.sh" "$@"
               '')
-              paseo.packages.${system}.default
+              # paseo.packages.${system}.default
               pomerium-cli
               ripgrep
               tenv
