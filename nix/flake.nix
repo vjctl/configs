@@ -206,7 +206,7 @@
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
                 eval "$(herdr completion zsh)"
-                alias code=zed
+                code() { cd $1;zed .; }
                 if [[ -f "$HOME/.zshrc.local" ]]; then
                   source "$HOME/.zshrc.local"
                 fi
