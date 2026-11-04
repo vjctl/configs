@@ -35,7 +35,6 @@
           # Enable TouchID for sudo in Terminal
           security.pam.services.sudo_local.touchIdAuth = true;
 
-          # Enable zsh system-wide
           programs.zsh.enable = true;
 
           users.users.${username}.home = "/Users/${username}";
@@ -124,6 +123,12 @@
               kubectl
               kubernetes-helm
               nodejs_24
+              neovim
+              tree-sitter
+              ripgrep
+              lazygit
+              gnumake
+              gcc
               pgcli
               pngpaste
               # pkgs.pi
@@ -206,7 +211,7 @@
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
                 eval "$(herdr completion zsh)"
-                code() { cd $1;zed .; }
+                code() { cd $1;nvim .; }
                 if [[ -f "$HOME/.zshrc.local" ]]; then
                   source "$HOME/.zshrc.local"
                 fi
