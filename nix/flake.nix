@@ -209,7 +209,7 @@
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
                 eval "$(herdr completion zsh)"
-                code() { cd $1;nvim .; }
+                code() { cd $1;zed .; }
                 if [[ -f "$HOME/.zshrc.local" ]]; then
                   source "$HOME/.zshrc.local"
                 fi

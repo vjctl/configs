@@ -1,0 +1,29 @@
+{
+  "theme": "System",
+  "theme_dark": "dark-github",
+  "theme_light": "light-github",
+  "copy_on_select": true,
+  "cursor": {
+    "blink": false
+  },
+  "link_target": "Browser",
+  "layout": "Float",
+  "font_size": 15,
+  "pane_headers": "Split",
+  "status_bar": true,
+  "opacity": 70,
+  "blur": 100,
+  "prompt_style": "spaceship",
+  "new_tabs": "Home",
+  "start_folder": "~/devel/",
+  "files": {
+    "auto_save": {
+      "after_delay": 1000
+    }
+  },
+  "file_tree": {
+    "width": 354,
+    "compact": false
+  },
+  "secure_keyboard_entry": true
+}
