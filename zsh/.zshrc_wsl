@@ -123,9 +123,9 @@ source $HOME/.oh-my-zsh/plugins/git/git.plugin.zsh
 
 # Custom
 alias code='zed'
-alias dev='cd $HOME/Git'
-alias learn='cd $HOME/Git/development'
-alias sts='sh $HOME/Git/scripts/aws_sts.sh'
+alias dev='cd $HOME/devel'
+alias learn='cd $HOME/devel/learn'
+alias sts='sh $HOME/devel/scripts/aws_sts.sh'
 alias refresh='source $HOME/.zshrc'
 alias k='kubectl'
 alias kx='kubectx'
@@ -133,7 +133,7 @@ alias tg='terragrunt'
 alias tgfmt='terragrunt hclfmt --terragrunt-check --terragrunt-diff'
 alias tf='terraform'
 #alias spyder='nohup spyder --new-instance option & disown'
-alias cmds='code $HOME/Git/linux/cmds.txt'
+alias cmds='code $HOME/devel/linux/cmds.txt'
 alias pomerium-cli='/mnt/c/Users/User/scoop/shims/pomerium-cli.exe'
 alias notebook='nohup jupyter-notebook & disown'
 alias jupyter='docker rm pyspark && docker run -d -p 8888:8888 -e NB_UID=1000 -e GRANT_SUDO=yes --user root --name pyspark -v ~/Git:/home/jovyan/work jupyter/pyspark-notebook && docker logs pyspark'export PATH="/usr/local/opt/libpq/bin:$PATH"
