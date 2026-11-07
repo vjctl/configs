@@ -34,6 +34,7 @@ if (-not (scoop bucket list | Select-String "extras")) {
     Write-Host "Adding extras bucket" -ForegroundColor Yellow
     scoop bucket add extras
     scoop bucket add versions
+    scoop bucket add java
     scoop bucket add knox-scoop https://github.com/KNOXDEV/knox-scoop
     scoop bucket add nonportable
 }
@@ -42,18 +43,21 @@ if (-not (scoop bucket list | Select-String "extras")) {
 Write-Host "Installing packages" -ForegroundColor Yellow
 
 $packages = @(
-    "powertoys",
-    "extras/glazewm",
-    "extras/zebar",
-    "extras/motrix",
-    "extras/zed",
-    "extras/unigetui",
-    "notepadplusplus",
-    "extras/microsoft-teams",
-    "scoop-backup",
+    "7zip",
+    "extras/dbeaver",
+    "extras/discord",
+    "git",
     "extras/localsend",
-    "nonportable/grammarly-np"
-    "sqlite"
+    "extras/microsoft-teams",
+    "extras/motrix",
+    "nodejs",
+    "java/openjdk11",
+    "powertoys",
+    "knox-scoop/scoop-backup",
+    "scoop-search",
+    "extras/slack",
+    "sqlite",
+    "extras/unigetui"
 )
 
 foreach ($package in $packages) {
