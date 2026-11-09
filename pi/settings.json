@@ -4,7 +4,7 @@
     "npm:@plannotator/pi-extension",
     "npm:pi-atelier",
     "npm:@upstash/context7-pi",
-    "npm:pi-prompt-storage",
+    "npm:@luan.sh/pi-prompt-storage",
     "npm:pi-cursor-sdk",
     "npm:@ollama/pi-web-search"
   ],
