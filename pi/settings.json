@@ -1,12 +1,12 @@
 {
-  "lastChangelogVersion": "1.4.0",
+  "lastChangelogVersion": "1.5.0",
   "packages": [
     "npm:@plannotator/pi-extension",
-    "npm:pi-atelier",
     "npm:@upstash/context7-pi",
-    "npm:@luan.sh/pi-prompt-storage",
     "npm:pi-cursor-sdk",
-    "npm:@ollama/pi-web-search"
+    "npm:@ollama/pi-web-search",
+    "npm:pi-atelier",
+    "npm:@luan.sh/pi-prompt-storage"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
@@ -16,6 +16,11 @@
     "github-copilot/!(*fable*)",
     "cursor/!(*fable*|*gpt-6-astra*)"
   ],
-  "hideThinkingBlock": false,
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "theme": "system",
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.26",
+    "{\"source\":\"npm:pi-atelier\",\"scope\":\"user\"}": "0.18.0",
+    "{\"source\":\"npm:pi-claude-code-ui\",\"scope\":\"user\"}": "1.0.109"
+  }
 }

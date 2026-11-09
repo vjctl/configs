@@ -11,4 +11,7 @@ cp ~/.pi/agent/pi-atelier.json pi
 cp pi/*.json ~/.pi/agent/
 mkdir -p ~/.pi/agent/extensions
 cp pi/*.ts ~/.pi/agent/extensions/
+mkdir -p ~/.agents/skills
+cp -r skills/ ~/.agents/skills
+ ln -s  ~/.agents/skills/general/*.md ~/.agents/AGENTS.md
 ```

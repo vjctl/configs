@@ -4,6 +4,7 @@
 cp ~/.config/zed/*.json zed/
 
 cp zed/*.json ~/.config/zed/
+ln -s ~/.agents/AGENTS.md ~/.config/zed/AGENTS.md
 ```
 ```powershell
 cp $env:APPDATA\Zed\*.json zed/
