@@ -187,16 +187,16 @@
             # Zsh
             programs.zsh = {
               enable = true;
-              enableCompletion = false;
+              enableCompletion = true;
               autosuggestion.enable = true;
               syntaxHighlighting.enable = true;
-              plugins = [
-                {
-                  name = "zsh-autocomplete";
-                  src = pkgs.zsh-autocomplete;
-                  file = "share/zsh-autocomplete/zsh-autocomplete.plugin.zsh";
-                }
-              ];
+              # plugins = [
+              #   {
+              #     name = "zsh-autocomplete";
+              #     src = pkgs.zsh-autocomplete;
+              #     file = "share/zsh-autocomplete/zsh-autocomplete.plugin.zsh";
+              #   }
+              # ];
               shellAliases = {
                 k = "kubecolor";
                 tg = "terragrunt";
