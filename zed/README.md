@@ -1,6 +1,6 @@
 # Zed
 
-```bash
+```sh
 cp ~/.config/zed/*.json zed/
 
 cp zed/*.json ~/.config/zed/
@@ -34,7 +34,7 @@ rm -rf ~/.copilot/session-state/*
 rm -rf ~/.cusor/projects/* ~/.cusor/chats/* ~/.cursor/ai*/*.db
 ```
 
-```bash
+```sh
 sudo apt install libsecret-tools
 secret-tool clear service cursor-access-token account cursor-user
 secret-tool clear service cursor-refresh-token account cursor-user

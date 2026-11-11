@@ -1,6 +1,6 @@
 # Homebrew
 
-```bash
+```sh
 brew bundle               # install from Brewfile
 brew bundle --verbose
 brew bundle check         # verify all deps installed

@@ -1,6 +1,6 @@
 # Tuios
 
-```bash
+```sh
 cp "$(tuios config path)" tui/
 
 cp tui/*.toml "$(tuios config path)"

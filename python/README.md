@@ -1,5 +1,5 @@
 # Python
 
-```bash
+```sh
 bash +x ./pyenv.sh
 ```

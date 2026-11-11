@@ -7,6 +7,6 @@
 
 </div>
 
-```bash
+```sh
 sudo bash +x ./nix.sh
 ```
