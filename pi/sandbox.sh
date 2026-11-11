@@ -17,8 +17,7 @@ docker volume create "$EXTENSIONS" >/dev/null
 docker volume create "$CACHE" >/dev/null
 
 docker image inspect "$TAG" >/dev/null 2>&1 ||
-  docker buildx build \
-    --no-cache \
+  docker build --no-cache \
     --secret "id=$SSL_CERT_ID,src=$SSL_CERT_FILE" \
     -t "$TAG" - <<'DOCKERFILE'
 FROM node:lts-bookworm-slim
@@ -66,7 +65,8 @@ RUN uv python install 3.15 --default \
 RUN npm install -g npm@latest \
  && npm install -g --ignore-scripts \
     @earendil-works/pi-coding-agent \
-    typescript \
+    ketch-cli \
+    typescript@6 \
     typescript-language-server
 RUN curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/destructive_command_guard/main/install.sh \
   | bash -s -- --dest /usr/local/bin --no-configure --verify --quiet

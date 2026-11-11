@@ -7,7 +7,11 @@ import { pathToFileURL } from "node:url";
 import { Type } from "@earendil-works/pi-ai";
 import { defineTool, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
-type ServerConfig = { command: string; args?: string[] };
+type ServerConfig = {
+	command: string;
+	args?: string[];
+	initializationOptions?: Record<string, unknown>;
+};
 type Message = {
 	id?: number | string | null;
 	method?: string;
@@ -112,11 +116,12 @@ class LspClient {
 		this.send({ jsonrpc: "2.0", method, params });
 	}
 
-	async start() {
+	async start(initializationOptions?: Record<string, unknown>) {
 		const rootUri = pathToFileURL(this.root).href;
 		await this.request("initialize", {
 			processId: process.pid,
 			rootUri,
+			initializationOptions,
 			capabilities: { workspace: { configuration: true, workspaceFolders: true } },
 			workspaceFolders: [{ uri: rootUri, name: basename(this.root) }],
 		});
@@ -179,7 +184,7 @@ const lspTool = defineTool({
 		if (!client) {
 			client = new LspClient(server, process.cwd());
 			clients.set(language.server, client);
-			await client.start();
+			await client.start(server.initializationOptions);
 		}
 
 		const uri = pathToFileURL(file).href;

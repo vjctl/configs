@@ -18,7 +18,12 @@
     },
     "node": {
       "command": "typescript-language-server",
-      "args": ["--stdio"]
+      "args": ["--stdio"],
+      "initializationOptions": {
+        "tsserver": {
+          "path": "tsserver"
+        }
+      }
     }
   }
 }
