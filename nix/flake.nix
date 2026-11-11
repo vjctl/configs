@@ -206,6 +206,7 @@
                 rc = "code -e \"$HOME/.zshrc.local\"";
                 aws-logout = "aws sso logout && unset AWS_PROFILE && kubectl config unset current-context";
               };
+              envExtra = "zstyle ':autocomplete:async' enabled no";
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
                 eval "$(herdr completion zsh)"
