@@ -29,8 +29,8 @@ ENV UV_PYTHON_INSTALL_DIR=/usr/local/share/uv/python \
     UV_TOOL_BIN_DIR=/usr/local/bin \
     UV_SYSTEM_CERTS=true
 
-RUN apt-get update
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
     build-essential \
     ca-certificates \
     curl \
@@ -39,9 +39,8 @@ RUN apt-get install -y --no-install-recommends \
     git \
     gnupg \
     jq \
-    openssh-client \
     ripgrep \
-    socat
+ && rm -rf /var/lib/apt/lists/*
 
 # RUN git config --system credential.helper '!gh auth git-credential'
 RUN --mount=type=secret,id=ssl_certs,required=false \
@@ -59,7 +58,10 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
 RUN curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/latest/download/terragrunt_linux_$(dpkg --print-architecture)" \
   -o /usr/local/bin/terragrunt \
  && chmod +x /usr/local/bin/terragrunt
-RUN uv python install 3.15 --default \
+RUN uv python install \
+ && PYTHON="$(uv python find)" \
+ && ln -sf "$PYTHON" /usr/local/bin/python \
+ && ln -sf "$PYTHON" /usr/local/bin/python3 \
  && uv tool install python-lsp-server \
  && uv tool install basedpyright
 RUN npm install -g npm@latest \
@@ -86,20 +88,13 @@ ENV HOME=/root \
     XDG_STATE_HOME=/root/.pi \
     PLANNOTATOR_DATA_DIR=/root/.cache/plannotator \
     PLANNOTATOR_REMOTE=1 \
-    OLLAMA_HOST=http://host.docker.internal:11434 \
     npm_package_config_node_gyp_devdir=/usr/local \
     npm_config_cache=/root/.cache/npm
 
 RUN mkdir -p /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
  && chmod 1777 /root/.cache /root/.pi/agent/npm /usr/local/share/xdg
 
-COPY --chmod=755 <<'ENTRY' /usr/local/bin/pi-entry
-#!/bin/sh
-socat TCP-LISTEN:11434,fork,reuseaddr,bind=127.0.0.1 TCP:host.docker.internal:11434 &
-exec pi "$@"
-ENTRY
-
-ENTRYPOINT ["pi-entry"]
+ENTRYPOINT ["pi"]
 DOCKERFILE
 
 export GH_TOKEN="$(gh auth token)"
