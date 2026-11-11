@@ -1,0 +1,12 @@
+{
+  "tint": { "light": 3, "dark": 2 },
+  "border": 0.6,
+  "dim": 0.5,
+  "single": true,
+  "colors": {
+    "custom": "#029633"
+  },
+  "rules": [
+    { "user": "<username>", "color": "custom" }
+  ]
+}

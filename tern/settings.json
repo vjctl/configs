@@ -4,6 +4,7 @@
   "theme_light": "light-github",
   "copy_on_select": true,
   "cursor": {
+    "shape": "underline",
     "blink": false
   },
   "link_target": "Browser",
@@ -14,6 +15,30 @@
   "opacity": 70,
   "blur": 100,
   "prompt_style": "spaceship",
+  "prompt_parts": {
+    "palette": "classic",
+    "frame": "rounded",
+    "char": "chevron",
+    "layout": {
+      "left": [
+        "dir",
+        "vcs",
+        "node_version",
+        "go_version",
+        "rust_version",
+        "virtualenv",
+        "command_execution_time",
+        "background_jobs",
+        "direnv",
+        "pyenv"
+      ],
+      "right": [
+        "kubecontext",
+        "aws",
+        "nix_shell"
+      ]
+    }
+  },
   "new_tabs": "Home",
   "start_folder": "~/devel/",
   "files": {
@@ -24,6 +49,12 @@
   "file_tree": {
     "width": 354,
     "compact": false
+  },
+  "keybinds": {
+    "cmd+alt+down": "resize_split:down",
+    "cmd+alt+left": "resize_split:left",
+    "cmd+alt+right": "resize_split:right",
+    "cmd+alt+up": "resize_split:up"
   },
   "secure_keyboard_entry": true
 }
