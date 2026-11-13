@@ -5,7 +5,8 @@
     "npm:@upstash/context7-pi",
     "npm:pi-cursor-sdk",
     "npm:pi-atelier",
-    "npm:@luan.sh/pi-prompt-storage"
+    "npm:@luan.sh/pi-prompt-storage",
+    "npm:@thinkrail/pi-ask-user-question"
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
@@ -18,8 +19,8 @@
   "enableInstallTelemetry": false,
   "theme": "system",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.26",
-    "{\"source\":\"npm:pi-atelier\",\"scope\":\"user\"}": "0.18.0",
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.39",
+    "{\"source\":\"npm:pi-atelier\",\"scope\":\"user\"}": "0.20.0",
     "{\"source\":\"npm:pi-claude-code-ui\",\"scope\":\"user\"}": "1.0.109"
   }
 }
