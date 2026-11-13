@@ -7,6 +7,7 @@ cp "$HOME/Library/Application Support/Tern/plugin-data/pane-highlight/config.jso
 
 ```sh
 cp tern/pane.json "$HOME/Library/Application Support/Tern/plugin-data/pane-highlight/config.json"
+cp tern/settings.json "$HOME/Library/Application Support/Tern/settings.json";
 ```
 
 ```sh
