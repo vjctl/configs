@@ -88,6 +88,7 @@ ENV HOME=/root \
     XDG_STATE_HOME=/root/.pi \
     PLANNOTATOR_DATA_DIR=/root/.cache/plannotator \
     PLANNOTATOR_REMOTE=1 \
+    PLANNOTATOR_AGENT_TERMINAL_REMOTE=1 \
     npm_package_config_node_gyp_devdir=/usr/local \
     npm_config_cache=/root/.cache/npm
 
