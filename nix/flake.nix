@@ -100,7 +100,6 @@
 
             # Dotfile Symlinks
             # xdg.configFile = {
-            #   "herdr/config.toml".source = ./sources/herdr/config.toml;
             #   "starship.toml".source = ./sources/starship/starship.toml;
             # };
 
@@ -112,7 +111,7 @@
               awscli2
               docker-credential-helpers
               eksctl
-              herdr
+              # herdr
               gnupg
               imagemagick
               jq
@@ -209,7 +208,6 @@
               envExtra = "zstyle ':autocomplete:async' enabled no";
               initContent = ''
                 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-                eval "$(herdr completion zsh)"
                 code() { cd $1;zed .; }
                 if [[ -f "$HOME/.zshrc.local" ]]; then
                   source "$HOME/.zshrc.local"
