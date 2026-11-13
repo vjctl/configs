@@ -13,7 +13,7 @@ TAG="$IMAGE:$PLATFORM_ARCH"
 CACHE="$IMAGE-$PLATFORM_ARCH-cache"
 SSL_CERT_ID="ssl_certs"
 AGENT_HOME="$HOME/.goose"
-mkdir -p "$AGENT_HOME/config" "$AGENT_HOME/share" "$AGENT_HOME/state" "$AGENT_HOME/cursor"
+mkdir -p "$AGENT_HOME/config" "$AGENT_HOME/share" "$AGENT_HOME/state" "$AGENT_HOME/cursor" "$AGENT_HOME/cursor-config"
 docker volume create "$CACHE" >/dev/null
 
 docker image inspect "$TAG" >/dev/null 2>&1 ||
@@ -72,6 +72,7 @@ docker run --rm "${TTY_FLAGS[@]}" \
   --mount "type=bind,src=${AGENT_HOME}/share,dst=/root/.local/share/goose" \
   --mount "type=bind,src=${AGENT_HOME}/state,dst=/root/.local/state/goose" \
   --mount "type=bind,src=${AGENT_HOME}/cursor,dst=/root/.cursor" \
+  --mount "type=bind,src=${AGENT_HOME}/cursor-config,dst=/root/.config/cursor" \
   --mount "type=volume,src=${CACHE},dst=/root/.cache" \
   --mount "type=bind,src=${PWD},dst=${PWD}" \
   --mount "type=bind,src=${SSL_CERT_FILE},dst=${SSL_CERT_FILE},readonly" \
