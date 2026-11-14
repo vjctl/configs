@@ -6,7 +6,15 @@
     "npm:pi-cursor-sdk",
     "npm:pi-atelier",
     "npm:@luan.sh/pi-prompt-storage",
-    "npm:@thinkrail/pi-ask-user-question"
+    "npm:@thinkrail/pi-ask-user-question",
+    {
+      "source": "git:github.com/github/awesome-copilot",
+      "skills": [
+        "skills/aws-well-architected-review",
+        "skills/refactor",
+        "skills/pr-address-feedback"
+      ]
+    }
   ],
   "defaultThinkingLevel": "medium",
   "defaultProvider": "github-copilot",
