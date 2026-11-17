@@ -27,7 +27,7 @@
   "enableInstallTelemetry": false,
   "theme": "system",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.39",
+    "{\"source\":\"npm:pi-cursor-sdk\",\"scope\":\"user\"}": "0.5.42",
     "{\"source\":\"npm:pi-atelier\",\"scope\":\"user\"}": "0.20.0",
     "{\"source\":\"npm:pi-claude-code-ui\",\"scope\":\"user\"}": "1.0.109"
   }
