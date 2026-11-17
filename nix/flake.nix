@@ -202,7 +202,7 @@
                 tf = "terraform";
                 dev = "cd $HOME/devel";
                 refresh = "source $HOME/.zshrc";
-                rc = "zed -e \"$HOME/.zshrc.local\"";
+                rc = "\${(z)EDITOR} \"$HOME/.zshrc.local\"";
                 aws-logout = "aws sso logout && unset AWS_PROFILE && kubectl config unset current-context";
               };
               envExtra = "zstyle ':autocomplete:async' enabled no";
