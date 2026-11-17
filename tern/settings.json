@@ -7,11 +7,38 @@
     "shape": "underline",
     "blink": false
   },
+  "link_click": "Command",
   "link_target": "Browser",
+  "paste": {
+    "confirm_if_large": true
+  },
   "layout": "Float",
   "font_size": 15,
+  "agent_command": "pi",
   "pane_headers": "Split",
-  "status_bar": true,
+  "widgets": [
+    {
+      "id": "cwd"
+    },
+    {
+      "id": "git"
+    },
+    {
+      "id": "run"
+    },
+    {
+      "id": "spacer"
+    },
+    {
+      "id": "lines"
+    },
+    {
+      "id": "size"
+    },
+    {
+      "id": "status"
+    }
+  ],
   "opacity": 70,
   "blur": 100,
   "prompt_style": "spaceship",
@@ -41,6 +68,7 @@
   },
   "new_tabs": "Home",
   "start_folder": "~/devel/",
+  "reconnect_hosts": false,
   "files": {
     "auto_save": {
       "after_delay": 1000
@@ -48,6 +76,7 @@
   },
   "file_tree": {
     "width": 354,
+    "search_ignored": true,
     "compact": false
   },
   "keybinds": {
