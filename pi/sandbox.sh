@@ -93,19 +93,20 @@ ENV HOME=/root \
     npm_config_cache=/root/.cache/npm
 
 RUN mkdir -p /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
+ && chmod 755 /root \
  && chmod 1777 /root/.cache /root/.pi/agent/npm /usr/local/share/xdg
 
 ENTRYPOINT ["pi"]
 DOCKERFILE
 
 export GH_TOKEN="$(gh auth token)"
+WORKDIR="/root/$(basename "$PWD")"
 
 PORT=""
 for p in $(seq 19430 19440); do
   (exec 3<>"/dev/tcp/127.0.0.1/$p") 2>/dev/null || { PORT=$p; break; }
 done
 [ -n "$PORT" ] || { echo "No port in 19430-19440" >&2; exit 1; }
-
 
 CLIP="$(mktemp -d)"
 while :; do pngpaste "$CLIP/img.png" 2>/dev/null || rm -f "$CLIP/img.png"; sleep 0.5; done &
@@ -127,15 +128,14 @@ docker run --rm "${TTY_FLAGS[@]}" \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
   --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME|VIRTUAL_ENV)$') \
-  --mount "type=bind,src=${HOME},dst=/root,readonly" \
-  --mount "type=bind,src=${PWD},dst=${PWD}" \
+  --mount "type=bind,src=${HOME}/devel,dst=/root/devel,readonly" \
+  --mount "type=bind,src=${PWD},dst=${WORKDIR}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
   --mount "type=volume,src=${EXTENSIONS},dst=/root/.pi/agent/npm" \
   --mount "type=volume,src=${CACHE},dst=/root/.cache" \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
   --mount "type=bind,src=${CLIP},dst=/clip,readonly" \
   --mount "type=bind,src=${SSL_CERT_FILE},dst=${SSL_CERT_FILE},readonly" \
-  --workdir "${PWD}" \
-  -e GH_TOKEN \
+  --workdir "${WORKDIR}" \
   "$TAG" \
   "$@"
