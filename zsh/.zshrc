@@ -129,3 +129,13 @@ csbx() {
     --env-file <(compgen -e | tr ' ' '\n' | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME)$') \
     -v "$SSL_CERT_FILE:$SSL_CERT_FILE:ro" ubuntu:latest
 }
+
+if [[ -n "$TERN_PANE" ]]; then
+  mkdir -p ~/.pi/term
+  _term() {
+    local f=~/.pi/term/${PWD:t}.$TERN_PANE.log
+    ( tern capture "$TERN_PANE" >"$f.tmp" 2>/dev/null && mv "$f.tmp" "$f" ) &!
+  }
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _term
+fi
