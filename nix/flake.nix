@@ -136,14 +136,7 @@
               pomerium-cli
               ripgrep
               tenv
-              (stdenvNoCC.mkDerivation {
-                name = "uv-0.13.6";
-                src = fetchurl {
-                  url = "https://github.com/astral-sh/uv/releases/download/0.13.6/uv-aarch64-apple-darwin.tar.gz";
-                  hash = "sha256-YPvVyKHtaBhF7qKNnWIvzeA8UekaQ0ZbZKHhfbHtNHI=";
-                };
-                installPhase = "install -Dm755 uv uvx -t $out/bin";
-              })
+              uv
               watch
               wget
               ytt
