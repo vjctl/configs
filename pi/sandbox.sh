@@ -34,42 +34,32 @@ RUN apt-get update \
     build-essential \
     ca-certificates \
     curl \
-    fd-find \
     gh \
     git \
-    gnupg \
     jq \
     ripgrep \
  && rm -rf /var/lib/apt/lists/*
 
 # RUN git config --system credential.helper '!gh auth git-credential'
+
 RUN --mount=type=secret,id=ssl_certs,required=false \
     if [ -f /run/secrets/ssl_certs ]; then \
         cat /run/secrets/ssl_certs >> /etc/ssl/certs/ca-certificates.crt; \
     fi
 
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg \
-      | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg \
-    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com bookworm main" \
-      > /etc/apt/sources.list.d/hashicorp.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends terraform terraform-ls \
-    && rm -rf /var/lib/apt/lists/*
-RUN curl -fsSL "https://github.com/gruntwork-io/terragrunt/releases/latest/download/terragrunt_linux_$(dpkg --print-architecture)" \
-  -o /usr/local/bin/terragrunt \
- && chmod +x /usr/local/bin/terragrunt
 RUN uv python install \
  && PYTHON="$(uv python find)" \
  && ln -sf "$PYTHON" /usr/local/bin/python \
  && ln -sf "$PYTHON" /usr/local/bin/python3 \
  && uv tool install python-lsp-server \
  && uv tool install basedpyright
+
 RUN npm install -g npm@latest \
  && npm install -g --ignore-scripts \
     @earendil-works/pi-coding-agent \
     ketch-cli \
-    typescript@6 \
     typescript-language-server
+
 RUN curl -fsSL https://raw.githubusercontent.com/Dicklesworthstone/destructive_command_guard/main/install.sh \
   | bash -s -- --dest /usr/local/bin --no-configure --verify --quiet
 
