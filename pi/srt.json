@@ -1,0 +1,28 @@
+// https://github.com/anthropics/sandbox-runtime
+{
+  "network": {
+    "allowedDomains": [],
+    "deniedDomains": ["*"],
+    "strictAllowlist": true
+  },
+  "filesystem": {
+    "denyRead": [],
+    "allowWrite": ["."],
+    "denyWrite": []
+  },
+  "credentials": {
+    "files": [
+      { "path": "~/.aws", "mode": "deny" },
+      { "path": "~/.kube", "mode": "deny" }
+    ],
+    "envVars": [
+      { "name": "AWS_ACCESS_KEY_ID", "mode": "deny" },
+      { "name": "AWS_SECRET_ACCESS_KEY", "mode": "deny" },
+      { "name": "AWS_SESSION_TOKEN", "mode": "deny" },
+      { "name": "AWS_PROFILE", "mode": "deny" },
+      { "name": "AWS_SHARED_CREDENTIALS_FILE", "mode": "deny" },
+      { "name": "AWS_CONFIG_FILE", "mode": "deny" },
+      { "name": "KUBECONFIG", "mode": "deny" }
+    ]
+  }
+}
