@@ -133,7 +133,7 @@ csbx() {
 if [[ -n "$TERN_PANE" ]]; then
   mkdir -p ~/.pi/term
   _term() {
-    local f=~/.pi/term/${PWD:t}.$TERN_PANE.log
+    local f=~/.pi/term/$(basename "$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")").$TERN_PANE.log
     ( tern capture "$TERN_PANE" >"$f.tmp" 2>/dev/null && mv "$f.tmp" "$f" ) &!
   }
   autoload -Uz add-zsh-hook
