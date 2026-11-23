@@ -86,7 +86,9 @@ ENV HOME=/root \
     PLANNOTATOR_AGENT_TERMINAL_REMOTE=1 \
     NPM_PACKAGE_CONFIG_NODE_GYP_DEVDIR=/usr/local \
     NPM_CONFIG_CACHE=/root/.cache/npm \
-    NODE_COMPILE_CACHE=/root/.cache/node-compile
+    NODE_COMPILE_CACHE=/root/.cache/node-compile \
+    UV_CACHE_DIR=/tmp/uvcache \
+    UV_PYTHON_INSTALL_DIR=/tmp/uvpy
 
 RUN mkdir -p /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
  && chmod 755 /root \
