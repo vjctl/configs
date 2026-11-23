@@ -68,6 +68,7 @@
   },
   "new_tabs": "Home",
   "start_folder": "~/devel/",
+  "new_blocks": "Ask",
   "reconnect_hosts": false,
   "files": {
     "auto_save": {
@@ -85,5 +86,6 @@
     "cmd+alt+right": "resize_split:right",
     "cmd+alt+up": "resize_split:up"
   },
-  "secure_keyboard_entry": true
+  "secure_keyboard_entry": true,
+  "secure_input_indication": false
 }
