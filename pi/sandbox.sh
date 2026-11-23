@@ -90,7 +90,7 @@ ENTRYPOINT ["pi"]
 DOCKERFILE
 
 export GH_TOKEN="$(gh auth token)"
-WORKDIR="/root/$(basename "$PWD")"
+WORKDIR="/root${PWD#"$HOME"}"
 
 PORT=""
 for p in $(seq 19430 19440); do
