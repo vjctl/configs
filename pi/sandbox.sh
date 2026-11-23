@@ -19,13 +19,20 @@ docker image inspect "$TAG" >/dev/null 2>&1 ||
     --secret "id=$SSL_CERT_ID,src=$SSL_CERT_FILE" \
     -t "$TAG" - <<'DOCKERFILE'
 FROM node:lts-bookworm-slim
+ARG CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 COPY --from=astral/uv /uv /uvx /usr/local/bin/
 
 ENV UV_PYTHON_INSTALL_DIR=/usr/local/share/uv/python \
     UV_PYTHON_BIN_DIR=/usr/local/bin \
     UV_TOOL_DIR=/usr/local/share/uv/tools \
     UV_TOOL_BIN_DIR=/usr/local/bin \
-    UV_SYSTEM_CERTS=true
+    UV_SYSTEM_CERTS=true \
+    SSL_CERT_FILE=${CA_BUNDLE} \
+    REQUESTS_CA_BUNDLE=${CA_BUNDLE} \
+    CURL_CA_BUNDLE=${CA_BUNDLE} \
+    AWS_CA_BUNDLE=${CA_BUNDLE} \
+    NODE_EXTRA_CA_CERTS=${CA_BUNDLE} \
+    GIT_SSL_CAINFO=${CA_BUNDLE}
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -42,7 +49,7 @@ RUN apt-get update \
 
 RUN --mount=type=secret,id=ssl_certs,required=false \
     if [ -f /run/secrets/ssl_certs ]; then \
-        cat /run/secrets/ssl_certs >> /etc/ssl/certs/ca-certificates.crt; \
+        cat /run/secrets/ssl_certs >> "$CA_BUNDLE"; \
     fi
 
 RUN uv python install \
@@ -111,12 +118,11 @@ TTY_FLAGS=(-i)
 docker run --rm "${TTY_FLAGS[@]}" \
   --cap-drop=ALL \
   --security-opt=no-new-privileges:true \
-  --security-opt=seccomp=builtin \
   --pids-limit=512 \
   --user "$(id -u):$(id -g)" \
   -e PLANNOTATOR_PORT="$PORT" \
   -p "127.0.0.1:$PORT:$PORT" \
-  --env-file <(compgen -e | grep -Ev '^(HOME|PATH|PWD|OLDPWD|SHELL|TMPDIR|USER|LOGNAME|VIRTUAL_ENV)$') \
+  -e GH_TOKEN \
   --mount "type=bind,src=${HOME}/devel,dst=/root/devel,readonly" \
   --mount "type=bind,src=${PWD},dst=${WORKDIR}" \
   --mount "type=bind,src=${HOME}/.pi,dst=/root/.pi" \
@@ -124,7 +130,6 @@ docker run --rm "${TTY_FLAGS[@]}" \
   --mount "type=volume,src=${CACHE},dst=/root/.cache" \
   --mount "type=bind,src=${HOME}/.cursor,dst=/root/.cursor" \
   --mount "type=bind,src=${CLIP},dst=/clip,readonly" \
-  --mount "type=bind,src=${SSL_CERT_FILE},dst=${SSL_CERT_FILE},readonly" \
   --workdir "${WORKDIR}" \
   "$TAG" \
   "$@"
