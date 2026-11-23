@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-case "$(docker info --format '{{.Architecture}}')" in
-  x86_64) PLATFORM_ARCH=amd64 ;;
-  aarch64) PLATFORM_ARCH=arm64 ;;
+case "$(uname -m)" in
+  x86_64|amd64) PLATFORM_ARCH=amd64 ;;
+  aarch64|arm64) PLATFORM_ARCH=arm64 ;;
 esac
 
 export SSL_CERT_FILE="${SSL_CERT_FILE:-/etc/ssl/certs/ca-certificates.crt}"
@@ -13,8 +13,6 @@ TAG="$IMAGE:$PLATFORM_ARCH"
 EXTENSIONS="$IMAGE-$PLATFORM_ARCH-extensions"
 CACHE="$IMAGE-$PLATFORM_ARCH-cache"
 SSL_CERT_ID="ssl_certs"
-docker volume create "$EXTENSIONS" >/dev/null
-docker volume create "$CACHE" >/dev/null
 
 docker image inspect "$TAG" >/dev/null 2>&1 ||
   docker build --no-cache \
@@ -79,8 +77,9 @@ ENV HOME=/root \
     PLANNOTATOR_DATA_DIR=/root/.cache/plannotator \
     PLANNOTATOR_REMOTE=1 \
     PLANNOTATOR_AGENT_TERMINAL_REMOTE=1 \
-    npm_package_config_node_gyp_devdir=/usr/local \
-    npm_config_cache=/root/.cache/npm
+    NPM_PACKAGE_CONFIG_NODE_GYP_DEVDIR=/usr/local \
+    NPM_CONFIG_CACHE=/root/.cache/npm \
+    NODE_COMPILE_CACHE=/root/.cache/node-compile
 
 RUN mkdir -p /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
  && chmod 755 /root \
@@ -89,7 +88,7 @@ RUN mkdir -p /root/.cache /root/.pi/agent/npm /usr/local/share/xdg \
 ENTRYPOINT ["pi"]
 DOCKERFILE
 
-export GH_TOKEN="$(gh auth token)"
+export GH_TOKEN="${GH_TOKEN:-$(gh auth token)}"
 WORKDIR="/root${PWD#"$HOME"}"
 
 PORT=""
