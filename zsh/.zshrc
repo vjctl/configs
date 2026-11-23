@@ -132,6 +132,7 @@ csbx() {
 
 if [[ -n "$TERN_PANE" ]]; then
   mkdir -p ~/.pi/term
+  find ~/.pi/term -name '*.log*' -mtime +7 -delete 2>/dev/null &!
   _term() {
     local f=~/.pi/term/$(basename "$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")").$TERN_PANE.log
     ( tern capture "$TERN_PANE" >"$f.tmp" 2>/dev/null && mv "$f.tmp" "$f" ) &!
